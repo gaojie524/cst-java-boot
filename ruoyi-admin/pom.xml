@@ -61,6 +61,18 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
+        <!-- 基础资料-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-documenter</artifactId>
+            <version>${ruoyi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

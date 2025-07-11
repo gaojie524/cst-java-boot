@@ -35,6 +35,8 @@
         <logback.version>1.2.13</logback.version>
         <spring-security.version>5.7.12</spring-security.version>
         <spring-framework.version>5.3.39</spring-framework.version>
+        <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+<!--        <hutool-all.version>5.7.9</hutool-all.version>-->
     </properties>
 
     <!-- 依赖声明 -->
@@ -218,6 +220,23 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- 基础资料-->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-documenter</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+            <!-- MyBatis-Plus依赖 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>cn.hutool</groupId>-->
+<!--                <artifactId>hutool-all</artifactId>-->
+<!--                <version>${hutool-all.version}</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -228,6 +247,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>ruoyi-documenter</module>
     </modules>
     <packaging>pom</packaging>
 
