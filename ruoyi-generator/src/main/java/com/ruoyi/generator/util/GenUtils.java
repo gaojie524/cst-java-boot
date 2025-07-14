@@ -215,7 +215,7 @@ public class GenUtils
      */
     public static String replaceText(String text)
     {
-        return RegExUtils.replaceAll(text, "(?:表|知草)", "");
+        return RegExUtils.replaceAll(text, "(?:表|云帆EMS)", "");
     }
 
     /**
