@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="processName != null  and processName != ''"> and process_name like concat('%', #{processName}, '%')</if>
             <if test="processDesc != null  and processDesc != ''"> and process_desc = #{processDesc}</if>
             <if test="processStatus != null  and processStatus != ''"> and process_status = #{processStatus}</if>
+            and delete_id = 0
         </where>
     </select>
     
@@ -106,7 +107,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteZsProcessByProcessIds" parameterType="String">
-        delete from zs_process where process_id in 
+        UPDATE zs_process
+        SET delete_id = 1
+        WHERE process_id IN
         <foreach item="processId" collection="array" open="(" separator="," close=")">
             #{processId}
         </foreach>

@@ -39,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="itemCategory != null  and itemCategory != ''"> and item_category = #{itemCategory}</if>
             <if test="itemStatus != null  and itemStatus != ''"> and item_status = #{itemStatus}</if>
             <if test="creationMethod != null  and creationMethod != ''"> and creation_method = #{creationMethod}</if>
+            and delete_id = 0
         </where>
     </select>
     
@@ -123,7 +124,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteZsItemHistoryByEventIds" parameterType="String">
-        delete from zs_item_history where event_id in 
+        UPDATE zs_item_history
+        SET delete_id = 1
+        WHERE event_id IN
         <foreach item="eventId" collection="array" open="(" separator="," close=")">
             #{eventId}
         </foreach>
