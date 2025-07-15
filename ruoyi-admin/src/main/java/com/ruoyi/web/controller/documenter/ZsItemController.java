@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.documenter.domain.ZsItemHistory;
 import com.ruoyi.documenter.service.IZsItemHistoryService;
@@ -29,6 +30,7 @@ import com.ruoyi.documenter.domain.ZsItem;
 import com.ruoyi.documenter.service.IZsItemService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 物料Controller
@@ -133,8 +135,30 @@ public class ZsItemController extends BaseController
             ZsItemHistory zsItemHistory = new ZsItemHistory();
             BeanUtils.copyProperties(zsItem,zsItemHistory);
             zsItemHistory.setOperation("2");
+            zsItemHistory.setUpdateBy(getUsername());
             zsItemHistoryService.insertZsItemHistory(zsItemHistory);
         }
         return toAjax(zsItemService.deleteZsItemByItemIds(itemIds));
+    }
+
+
+    @Log(title = "物料管理", businessType = BusinessType.IMPORT)
+    @PreAuthorize("@ss.hasPermi('documenter:item:import')")
+    @PostMapping("/importData")
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<ZsItem> util = new ExcelUtil<ZsItem>(ZsItem.class);
+        List<ZsItem> itemList = util.importExcel(file.getInputStream());
+        String operName = getUsername();
+        String message = zsItemService.importItem(itemList, updateSupport, operName);
+        return success(message);
+    }
+
+
+    @PostMapping("/importTemplate")
+    public void importTemplate(HttpServletResponse response)
+    {
+        ExcelUtil<ZsItem> util = new ExcelUtil<ZsItem>(ZsItem.class);
+        util.importTemplateExcel(response, "物料数据");
     }
 }

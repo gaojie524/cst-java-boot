@@ -64,7 +64,7 @@
         <!-- 基础资料-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-documenter</artifactId>
+            <artifactId>zc-documenter</artifactId>
             <version>${ruoyi.version}</version>
         </dependency>
 

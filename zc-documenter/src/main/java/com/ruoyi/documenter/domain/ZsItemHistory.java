@@ -6,29 +6,45 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 单位对象 zs_unit
+ * 物料历史
+对象 zs_item_history
  * 
  * @author ruoyi
- * @date 2025-07-11
+ * @date 2025-07-10
  */
-public class ZsUnit extends BaseEntity
+public class ZsItemHistory extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 单位ID */
+    /** 系统主健 */
+    private Long eventId;
+
+    /** 物料ID */
+    private Long itemId;
+
+    /** 物料编号 */
+    @Excel(name = "物料编号")
+    private String itemCode;
+
+    /** 物料名称 */
+    @Excel(name = "物料名称")
+    private String itemName;
+
+    /** 物料单位 */
+    @Excel(name = "物料单位")
     private Long unitId;
 
-    /** 单位编码 */
-    @Excel(name = "单位编码")
-    private String unitCode;
+    /** 物料类别    原材料/半成品/成品 */
+    @Excel(name = "物料类别    原材料/半成品/成品")
+    private String itemCategory;
 
-    /** 单位名称 */
-    @Excel(name = "单位名称")
-    private String unitName;
+    /** 物料状态 */
+    @Excel(name = "物料状态")
+    private String itemStatus;
 
-    /** 单位描述 */
-    @Excel(name = "单位描述")
-    private String unitDescription;
+    /** 创建方式 */
+    @Excel(name = "创建方式")
+    private String creationMethod;
 
     /** 备注1 */
     @Excel(name = "备注1")
@@ -54,44 +70,88 @@ public class ZsUnit extends BaseEntity
     @Excel(name = "最后更新标识")
     private String lastUpdateFlag;
 
-    public void setUnitId(Long unitId) 
+    /** 操作标识 */
+    @Excel(name = "操作标识")
+    private String operation;
+
+    public void setEventId(Long eventId) 
+    {
+        this.eventId = eventId;
+    }
+
+    public Long getEventId() 
+    {
+        return eventId;
+    }
+
+    public void setItemId(Long itemId) 
+    {
+        this.itemId = itemId;
+    }
+
+    public Long getItemId() 
+    {
+        return itemId;
+    }
+
+    public void setItemCode(String itemCode) 
+    {
+        this.itemCode = itemCode;
+    }
+
+    public String getItemCode() 
+    {
+        return itemCode;
+    }
+
+    public void setItemName(String itemName) 
+    {
+        this.itemName = itemName;
+    }
+
+    public String getItemName() 
+    {
+        return itemName;
+    }
+
+    public void setUnitId(Long unitId)
     {
         this.unitId = unitId;
     }
 
-    public Long getUnitId() 
+    public Long getUnitId()
     {
         return unitId;
     }
 
-    public void setUnitCode(String unitCode) 
+    public void setItemCategory(String itemCategory) 
     {
-        this.unitCode = unitCode;
+        this.itemCategory = itemCategory;
     }
 
-    public String getUnitCode() 
+    public String getItemCategory() 
     {
-        return unitCode;
+        return itemCategory;
     }
 
-    public void setUnitName(String unitName) 
+    public void setItemStatus(String itemStatus) 
     {
-        this.unitName = unitName;
+        this.itemStatus = itemStatus;
     }
 
-    public String getUnitName() 
+    public String getItemStatus() 
     {
-        return unitName;
+        return itemStatus;
     }
 
-    public void setUnitDescription(String unitDescription) 
+    public void setCreationMethod(String creationMethod) 
     {
-        this.unitDescription = unitDescription;
+        this.creationMethod = creationMethod;
     }
 
-    public String getUnitDescription() 
+    public String getCreationMethod() 
     {
-        return unitDescription;
+        return creationMethod;
     }
 
     public void setRemark1(String remark1) 
@@ -154,13 +214,27 @@ public class ZsUnit extends BaseEntity
         return lastUpdateFlag;
     }
 
+    public void setOperation(String operation) 
+    {
+        this.operation = operation;
+    }
+
+    public String getOperation() 
+    {
+        return operation;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("eventId", getEventId())
+            .append("itemId", getItemId())
+            .append("itemCode", getItemCode())
+            .append("itemName", getItemName())
             .append("unitId", getUnitId())
-            .append("unitCode", getUnitCode())
-            .append("unitName", getUnitName())
-            .append("unitDescription", getUnitDescription())
+            .append("itemCategory", getItemCategory())
+            .append("itemStatus", getItemStatus())
+            .append("creationMethod", getCreationMethod())
             .append("remark1", getRemark1())
             .append("remark2", getRemark2())
             .append("remark3", getRemark3())
@@ -171,6 +245,7 @@ public class ZsUnit extends BaseEntity
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("lastUpdateFlag", getLastUpdateFlag())
+            .append("operation", getOperation())
             .toString();
     }
 }

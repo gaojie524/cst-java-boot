@@ -16,9 +16,11 @@ public class ZsItem extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 物料ID */
+    @Excel(name = "物料序号", type = Excel.Type.EXPORT, cellType = Excel.ColumnType.NUMERIC, prompt = "物料编号")
     private Long itemId;
 
     /** 物料编号 */
+    @Excel(name = "物料编号")
     private String itemCode;
 
     /** 物料名称 */
@@ -26,11 +28,11 @@ public class ZsItem extends BaseEntity
     private String itemName;
 
     /** 物料单位 */
-    @Excel(name = "物料单位")
-    private String itemUnit;
+    @Excel(name = "物料单位", type = Excel.Type.IMPORT)
+    private Long unitId;
 
     /** 物料类别   原材料/半成品/成品 */
-    @Excel(name = "物料类别   原材料/半成品/成品")
+    @Excel(name = "物料类别   0-原材料/1-半成品/2-成品")
     private String itemCategory;
 
     /** 物料状态  Y-有效；N-失效 */
@@ -38,7 +40,7 @@ public class ZsItem extends BaseEntity
     private String itemStatus;
 
     /** 创建方式  前台录入/模板导入/接口导入 */
-    @Excel(name = "创建方式  前台录入/模板导入/接口导入")
+    @Excel(name = "创建方式  前台录入/模板导入/接口导入",type = Excel.Type.EXPORT)
     private String creationMethod;
 
     /** 备注1 */
@@ -95,14 +97,14 @@ public class ZsItem extends BaseEntity
         return itemName;
     }
 
-    public void setItemUnit(String itemUnit) 
+    public void setUnitId(Long unitId)
     {
-        this.itemUnit = itemUnit;
+        this.unitId = unitId;
     }
 
-    public String getItemUnit() 
+    public Long getUnitId()
     {
-        return itemUnit;
+        return unitId;
     }
 
     public void setItemCategory(String itemCategory) 
@@ -201,7 +203,7 @@ public class ZsItem extends BaseEntity
             .append("itemId", getItemId())
             .append("itemCode", getItemCode())
             .append("itemName", getItemName())
-            .append("itemUnit", getItemUnit())
+            .append("unitId", getUnitId())
             .append("itemCategory", getItemCategory())
             .append("itemStatus", getItemStatus())
             .append("creationMethod", getCreationMethod())

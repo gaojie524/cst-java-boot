@@ -78,7 +78,6 @@ public class ZsUnitController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody ZsUnit zsUnit)
     {
-        zsUnit.setUnitCode(UUID.randomUUID().toString());
         zsUnit.setCreateBy(getUsername());
         zsUnit.setUpdateBy(getUsername());
         return toAjax(zsUnitService.insertZsUnit(zsUnit));

@@ -2,14 +2,13 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.documenter.mapper.ZsItemHistoryMapper">
+<mapper namespace="com.ruoyi.documenter.mapper.ZsItemMapper">
     
-    <resultMap type="ZsItemHistory" id="ZsItemHistoryResult">
-        <result property="eventId"    column="event_id"    />
+    <resultMap type="ZsItem" id="ZsItemResult">
         <result property="itemId"    column="item_id"    />
         <result property="itemCode"    column="item_code"    />
         <result property="itemName"    column="item_name"    />
-        <result property="itemUnit"    column="item_unit"    />
+        <result property="unitId"    column="unit_id"    />
         <result property="itemCategory"    column="item_category"    />
         <result property="itemStatus"    column="item_status"    />
         <result property="creationMethod"    column="creation_method"    />
@@ -23,39 +22,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="lastUpdateFlag"    column="last_update_flag"    />
-        <result property="operation"    column="operation"    />
     </resultMap>
 
-    <sql id="selectZsItemHistoryVo">
-        select event_id, item_id, item_code, item_name, item_unit, item_category, item_status, creation_method, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag, operation from zs_item_history
+    <sql id="selectZsItemVo">
+        select item_id, item_code, item_name, unit_id, item_category, item_status, creation_method, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag from zs_item
     </sql>
 
-    <select id="selectZsItemHistoryList" parameterType="ZsItemHistory" resultMap="ZsItemHistoryResult">
-        <include refid="selectZsItemHistoryVo"/>
+    <sql id="selectZsItemVoByDeleteId">
+        and delete_id = 0    </sql>
+
+    <select id="selectZsItemList" parameterType="ZsItem" resultMap="ZsItemResult">
+        <include refid="selectZsItemVo"/>
         <where>  
-            <if test="itemCode != null  and itemCode != ''"> and item_code = #{itemCode}</if>
             <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
-            <if test="itemUnit != null  and itemUnit != ''"> and item_unit = #{itemUnit}</if>
+            <if test="unitId != null  and unitId != ''"> and unit_id = #{unitId}</if>
             <if test="itemCategory != null  and itemCategory != ''"> and item_category = #{itemCategory}</if>
             <if test="itemStatus != null  and itemStatus != ''"> and item_status = #{itemStatus}</if>
             <if test="creationMethod != null  and creationMethod != ''"> and creation_method = #{creationMethod}</if>
-            and delete_id = 0
+            <if test="remark1 != null  and remark1 != ''"> and remark1 = #{remark1}</if>
+            <if test="remark2 != null  and remark2 != ''"> and remark2 = #{remark2}</if>
+            <if test="remark3 != null  and remark3 != ''"> and remark3 = #{remark3}</if>
+            <if test="remark4 != null  and remark4 != ''"> and remark4 = #{remark4}</if>
+            <if test="remark5 != null  and remark5 != ''"> and remark5 = #{remark5}</if>
+            <if test="lastUpdateFlag != null  and lastUpdateFlag != ''"> and last_update_flag = #{lastUpdateFlag}</if>
+             and delete_id = 0
         </where>
     </select>
     
-    <select id="selectZsItemHistoryByEventId" parameterType="Long" resultMap="ZsItemHistoryResult">
-        <include refid="selectZsItemHistoryVo"/>
-        where event_id = #{eventId}
+    <select id="selectZsItemByItemId" parameterType="Long" resultMap="ZsItemResult">
+        <include refid="selectZsItemVo"/>
+        where item_id = #{itemId}
+        <include refid="selectZsItemVoByDeleteId"/>
+    </select>
+    <select id="selectItemByItemCode" parameterType="String" resultMap="ZsItemResult">
+        <include refid="selectZsItemVo"/>
+        where item_code = #{itemCode}
+        <include refid="selectZsItemVoByDeleteId"/>
     </select>
 
-    <insert id="insertZsItemHistory" parameterType="ZsItemHistory">
-        insert into zs_item_history
+    <insert id="insertZsItem" parameterType="ZsItem" useGeneratedKeys="true" keyProperty="itemId">
+        insert into zs_item
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="eventId != null">event_id,</if>
             <if test="itemId != null">item_id,</if>
-            <if test="itemCode != null and itemCode != ''">item_code,</if>
+            <if test="itemCode != null">item_code,</if>
             <if test="itemName != null and itemName != ''">item_name,</if>
-            <if test="itemUnit != null and itemUnit != ''">item_unit,</if>
+            <if test="unitId != null and unitId != ''">unit_id,</if>
             <if test="itemCategory != null and itemCategory != ''">item_category,</if>
             <if test="itemStatus != null and itemStatus != ''">item_status,</if>
             <if test="creationMethod != null and creationMethod != ''">creation_method,</if>
@@ -64,19 +75,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark3 != null">remark3,</if>
             <if test="remark4 != null">remark4,</if>
             <if test="remark5 != null">remark5,</if>
-            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
-            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
-            <if test="lastUpdateFlag != null and lastUpdateFlag != ''">last_update_flag,</if>
-            <if test="operation != null">operation,</if>
+            <if test="lastUpdateFlag != null">last_update_flag,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="eventId != null">#{eventId},</if>
             <if test="itemId != null">#{itemId},</if>
-            <if test="itemCode != null and itemCode != ''">#{itemCode},</if>
+            <if test="itemCode != null">#{itemCode},</if>
             <if test="itemName != null and itemName != ''">#{itemName},</if>
-            <if test="itemUnit != null and itemUnit != ''">#{itemUnit},</if>
+            <if test="unitId != null and unitId != ''">#{unitId},</if>
             <if test="itemCategory != null and itemCategory != ''">#{itemCategory},</if>
             <if test="itemStatus != null and itemStatus != ''">#{itemStatus},</if>
             <if test="creationMethod != null and creationMethod != ''">#{creationMethod},</if>
@@ -85,22 +94,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark3 != null">#{remark3},</if>
             <if test="remark4 != null">#{remark4},</if>
             <if test="remark5 != null">#{remark5},</if>
-            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
-            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="lastUpdateFlag != null and lastUpdateFlag != ''">#{lastUpdateFlag},</if>
-            <if test="operation != null">#{operation},</if>
+            <if test="lastUpdateFlag != null">#{lastUpdateFlag},</if>
          </trim>
     </insert>
 
-    <update id="updateZsItemHistory" parameterType="ZsItemHistory">
-        update zs_item_history
+    <update id="updateZsItem" parameterType="ZsItem">
+        update zs_item
         <trim prefix="SET" suffixOverrides=",">
-            <if test="itemId != null">item_id = #{itemId},</if>
-            <if test="itemCode != null and itemCode != ''">item_code = #{itemCode},</if>
+            <if test="itemCode != null">item_code = #{itemCode},</if>
             <if test="itemName != null and itemName != ''">item_name = #{itemName},</if>
-            <if test="itemUnit != null and itemUnit != ''">item_unit = #{itemUnit},</if>
+            <if test="unitId != null and unitId != ''">unit_id = #{unitId},</if>
             <if test="itemCategory != null and itemCategory != ''">item_category = #{itemCategory},</if>
             <if test="itemStatus != null and itemStatus != ''">item_status = #{itemStatus},</if>
             <if test="creationMethod != null and creationMethod != ''">creation_method = #{creationMethod},</if>
@@ -109,26 +116,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark3 != null">remark3 = #{remark3},</if>
             <if test="remark4 != null">remark4 = #{remark4},</if>
             <if test="remark5 != null">remark5 = #{remark5},</if>
-            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="lastUpdateFlag != null and lastUpdateFlag != ''">last_update_flag = #{lastUpdateFlag},</if>
-            <if test="operation != null">operation = #{operation},</if>
+            <if test="lastUpdateFlag != null">last_update_flag = #{lastUpdateFlag},</if>
         </trim>
-        where event_id = #{eventId}
+        where item_id = #{itemId}
     </update>
 
-    <delete id="deleteZsItemHistoryByEventId" parameterType="Long">
-        delete from zs_item_history where event_id = #{eventId}
+    <delete id="deleteZsItemByItemId" parameterType="Long">
+        delete from zs_item where item_id = #{itemId}
     </delete>
 
-    <delete id="deleteZsItemHistoryByEventIds" parameterType="String">
-        UPDATE zs_item_history
+    <update id="deleteZsItemByItemIds" parameterType="String">
+        UPDATE zs_item
         SET delete_id = 1
-        WHERE event_id IN
-        <foreach item="eventId" collection="array" open="(" separator="," close=")">
-            #{eventId}
+        WHERE item_id IN
+        <foreach item="itemId" collection="array" open="(" separator="," close=")">
+            #{itemId}
         </foreach>
-    </delete>
+    </update>
 </mapper>
