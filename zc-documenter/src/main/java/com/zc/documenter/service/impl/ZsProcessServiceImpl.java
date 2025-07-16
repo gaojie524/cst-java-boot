@@ -1,6 +1,8 @@
 package com.zc.documenter.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zc.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import com.zc.documenter.service.IZsProcessService;
  * @date 2025-07-11
  */
 @Service
-public class ZsProcessServiceImpl implements IZsProcessService 
+public class ZsProcessServiceImpl extends ServiceImpl<ZsProcessMapper, ZsProcess> implements IZsProcessService
 {
     @Autowired
     private ZsProcessMapper zsProcessMapper;
@@ -43,32 +45,29 @@ public class ZsProcessServiceImpl implements IZsProcessService
     {
         return zsProcessMapper.selectZsProcessList(zsProcess);
     }
-
     /**
      * 新增工序
-     * 
-     * @param zsProcess 工序
+     *
+     * @param zsProcess 工序管理
      * @return 结果
      */
     @Override
-    public int insertZsProcess(ZsProcess zsProcess)
-    {
-        zsProcess.setCreateTime(DateUtils.getNowDate());
-        return zsProcessMapper.insertZsProcess(zsProcess);
+    public int insertZsProcess(ZsProcess zsProcess) {
+        return zsProcessMapper.insert(zsProcess);
     }
 
     /**
      * 修改工序
-     * 
-     * @param zsProcess 工序
+     *
+     * @param zsProcess 工序管理
      * @return 结果
      */
     @Override
-    public int updateZsProcess(ZsProcess zsProcess)
-    {
-        zsProcess.setUpdateTime(DateUtils.getNowDate());
-        return zsProcessMapper.updateZsProcess(zsProcess);
+    public int updateZsProcess(ZsProcess zsProcess) {
+        return zsProcessMapper.updateById(zsProcess);
+
     }
+
 
     /**
      * 批量删除工序

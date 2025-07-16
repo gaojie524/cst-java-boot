@@ -1,7 +1,7 @@
 package com.zc.system.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import io.lettuce.core.dynamic.annotation.Param;
 import com.zc.common.core.domain.entity.SysDept;
 
 /**

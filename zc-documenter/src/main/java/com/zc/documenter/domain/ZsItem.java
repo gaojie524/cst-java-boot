@@ -1,5 +1,9 @@
 package com.zc.documenter.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.zc.common.annotation.Excel;
@@ -11,11 +15,14 @@ import com.zc.common.core.domain.BaseEntity;
  * @author ruoyi
  * @date 2025-07-10
  */
+@Data
+@TableName("zs_item")
 public class ZsItem extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 物料ID */
+    @TableId(value = "item_id", type = IdType.AUTO)
     @Excel(name = "物料序号", type = Excel.Type.EXPORT, cellType = Excel.ColumnType.NUMERIC, prompt = "物料编号")
     private Long itemId;
 
@@ -67,156 +74,5 @@ public class ZsItem extends BaseEntity
 //    @Excel(name = "最后更新标识")
     private String lastUpdateFlag;
 
-    public void setItemId(Long itemId) 
-    {
-        this.itemId = itemId;
-    }
 
-    public Long getItemId() 
-    {
-        return itemId;
-    }
-
-    public void setItemCode(String itemCode) 
-    {
-        this.itemCode = itemCode;
-    }
-
-    public String getItemCode() 
-    {
-        return itemCode;
-    }
-
-    public void setItemName(String itemName) 
-    {
-        this.itemName = itemName;
-    }
-
-    public String getItemName() 
-    {
-        return itemName;
-    }
-
-    public void setUnitCode(String unitCode)
-    {
-        this.unitCode = unitCode;
-    }
-
-    public String getUnitCode()
-    {
-        return unitCode;
-    }
-
-    public void setItemCategory(String itemCategory) 
-    {
-        this.itemCategory = itemCategory;
-    }
-
-    public String getItemCategory() 
-    {
-        return itemCategory;
-    }
-
-    public void setItemStatus(String itemStatus) 
-    {
-        this.itemStatus = itemStatus;
-    }
-
-    public String getItemStatus() 
-    {
-        return itemStatus;
-    }
-
-    public void setCreationMethod(String creationMethod) 
-    {
-        this.creationMethod = creationMethod;
-    }
-
-    public String getCreationMethod() 
-    {
-        return creationMethod;
-    }
-
-    public void setRemark1(String remark1) 
-    {
-        this.remark1 = remark1;
-    }
-
-    public String getRemark1() 
-    {
-        return remark1;
-    }
-
-    public void setRemark2(String remark2) 
-    {
-        this.remark2 = remark2;
-    }
-
-    public String getRemark2() 
-    {
-        return remark2;
-    }
-
-    public void setRemark3(String remark3) 
-    {
-        this.remark3 = remark3;
-    }
-
-    public String getRemark3() 
-    {
-        return remark3;
-    }
-
-    public void setRemark4(String remark4) 
-    {
-        this.remark4 = remark4;
-    }
-
-    public String getRemark4() 
-    {
-        return remark4;
-    }
-
-    public void setRemark5(String remark5) 
-    {
-        this.remark5 = remark5;
-    }
-
-    public String getRemark5() 
-    {
-        return remark5;
-    }
-
-    public void setLastUpdateFlag(String lastUpdateFlag) 
-    {
-        this.lastUpdateFlag = lastUpdateFlag;
-    }
-
-    public String getLastUpdateFlag() 
-    {
-        return lastUpdateFlag;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("itemId", getItemId())
-            .append("itemCode", getItemCode())
-            .append("itemName", getItemName())
-            .append("unitCode", getUnitCode())
-            .append("itemCategory", getItemCategory())
-            .append("itemStatus", getItemStatus())
-            .append("creationMethod", getCreationMethod())
-            .append("remark1", getRemark1())
-            .append("remark2", getRemark2())
-            .append("remark3", getRemark3())
-            .append("remark4", getRemark4())
-            .append("remark5", getRemark5())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("lastUpdateFlag", getLastUpdateFlag())
-            .toString();
-    }
 }

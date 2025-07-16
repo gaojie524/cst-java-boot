@@ -2,6 +2,7 @@ package com.zc.documenter.mapper;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zc.documenter.domain.ZsItem;
 
 /**
@@ -10,7 +11,7 @@ import com.zc.documenter.domain.ZsItem;
  * @author ruoyi
  * @date 2025-07-10
  */
-public interface ZsItemMapper 
+public interface ZsItemMapper extends BaseMapper<ZsItem>
 {
     /**
      * 查询物料
@@ -28,21 +29,6 @@ public interface ZsItemMapper
      */
     public List<ZsItem> selectZsItemList(ZsItem zsItem);
 
-    /**
-     * 新增物料
-     * 
-     * @param zsItem 物料
-     * @return 结果
-     */
-    public int insertZsItem(ZsItem zsItem);
-
-    /**
-     * 修改物料
-     * 
-     * @param zsItem 物料
-     * @return 结果
-     */
-    public int updateZsItem(ZsItem zsItem);
 
     /**
      * 删除物料

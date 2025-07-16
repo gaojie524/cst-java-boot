@@ -1,5 +1,9 @@
 package com.zc.documenter.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.zc.common.annotation.Excel;
@@ -11,11 +15,14 @@ import com.zc.common.core.domain.BaseEntity;
  * @author ruoyi
  * @date 2025-07-11
  */
+@Data
+@TableName("zs_process")
 public class ZsProcess extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 工序ID */
+    @TableId(value = "process_id",type = IdType.AUTO)
     private Long processId;
 
     /** 工序编号 */
@@ -62,145 +69,4 @@ public class ZsProcess extends BaseEntity
     @Excel(name = "最后更新标识")
     private String lastUpdateFlag;
 
-    public void setProcessId(Long processId) 
-    {
-        this.processId = processId;
-    }
-
-    public Long getProcessId() 
-    {
-        return processId;
-    }
-
-    public void setProcessCode(String processCode) 
-    {
-        this.processCode = processCode;
-    }
-
-    public String getProcessCode() 
-    {
-        return processCode;
-    }
-
-    public void setProcessName(String processName) 
-    {
-        this.processName = processName;
-    }
-
-    public String getProcessName() 
-    {
-        return processName;
-    }
-
-    public void setProcessDesc(String processDesc) 
-    {
-        this.processDesc = processDesc;
-    }
-
-    public String getProcessDesc() 
-    {
-        return processDesc;
-    }
-
-    public void setProcessStatus(String processStatus) 
-    {
-        this.processStatus = processStatus;
-    }
-
-    public String getProcessStatus() 
-    {
-        return processStatus;
-    }
-
-    public void setCreationMethod(String creationMethod) 
-    {
-        this.creationMethod = creationMethod;
-    }
-
-    public String getCreationMethod() 
-    {
-        return creationMethod;
-    }
-
-    public void setRemark1(String remark1) 
-    {
-        this.remark1 = remark1;
-    }
-
-    public String getRemark1() 
-    {
-        return remark1;
-    }
-
-    public void setRemark2(String remark2) 
-    {
-        this.remark2 = remark2;
-    }
-
-    public String getRemark2() 
-    {
-        return remark2;
-    }
-
-    public void setRemark3(String remark3) 
-    {
-        this.remark3 = remark3;
-    }
-
-    public String getRemark3() 
-    {
-        return remark3;
-    }
-
-    public void setRemark4(String remark4) 
-    {
-        this.remark4 = remark4;
-    }
-
-    public String getRemark4() 
-    {
-        return remark4;
-    }
-
-    public void setRemark5(String remark5) 
-    {
-        this.remark5 = remark5;
-    }
-
-    public String getRemark5() 
-    {
-        return remark5;
-    }
-
-    public void setLastUpdateFlag(String lastUpdateFlag) 
-    {
-        this.lastUpdateFlag = lastUpdateFlag;
-    }
-
-    public String getLastUpdateFlag() 
-    {
-        return lastUpdateFlag;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("processId", getProcessId())
-            .append("processCode", getProcessCode())
-            .append("processName", getProcessName())
-            .append("processDesc", getProcessDesc())
-            .append("processStatus", getProcessStatus())
-            .append("creationMethod", getCreationMethod())
-            .append("remark1", getRemark1())
-            .append("remark2", getRemark2())
-            .append("remark3", getRemark3())
-            .append("remark4", getRemark4())
-            .append("remark5", getRemark5())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("lastUpdateFlag", getLastUpdateFlag())
-            .toString();
-    }
 }

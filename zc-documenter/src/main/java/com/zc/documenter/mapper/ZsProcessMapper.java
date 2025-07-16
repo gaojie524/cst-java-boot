@@ -1,6 +1,8 @@
 package com.zc.documenter.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zc.documenter.domain.ZsProcess;
 
 /**
@@ -9,7 +11,7 @@ import com.zc.documenter.domain.ZsProcess;
  * @author ruoyi
  * @date 2025-07-11
  */
-public interface ZsProcessMapper 
+public interface ZsProcessMapper extends BaseMapper<ZsProcess>
 {
     /**
      * 查询工序
@@ -27,21 +29,6 @@ public interface ZsProcessMapper
      */
     public List<ZsProcess> selectZsProcessList(ZsProcess zsProcess);
 
-    /**
-     * 新增工序
-     * 
-     * @param zsProcess 工序
-     * @return 结果
-     */
-    public int insertZsProcess(ZsProcess zsProcess);
-
-    /**
-     * 修改工序
-     * 
-     * @param zsProcess 工序
-     * @return 结果
-     */
-    public int updateZsProcess(ZsProcess zsProcess);
 
     /**
      * 删除工序

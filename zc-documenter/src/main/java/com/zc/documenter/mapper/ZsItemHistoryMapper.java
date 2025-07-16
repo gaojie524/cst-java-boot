@@ -1,6 +1,8 @@
 package com.zc.documenter.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zc.documenter.domain.ZsItemHistory;
 
 /**
@@ -10,7 +12,7 @@ Mapper接口
  * @author ruoyi
  * @date 2025-07-10
  */
-public interface ZsItemHistoryMapper 
+public interface ZsItemHistoryMapper extends BaseMapper<ZsItemHistory>
 {
     /**
      * 查询物料历史
@@ -24,42 +26,20 @@ public interface ZsItemHistoryMapper
     public ZsItemHistory selectZsItemHistoryByEventId(Long eventId);
 
     /**
-     * 查询物料历史
-列表
+     * 查询物料历史列表
      * 
      * @param zsItemHistory 物料历史
 
-     * @return 物料历史
-集合
+     * @return 物料历史集合
      */
     public List<ZsItemHistory> selectZsItemHistoryList(ZsItemHistory zsItemHistory);
 
-    /**
-     * 新增物料历史
-
-     * 
-     * @param zsItemHistory 物料历史
-
-     * @return 结果
-     */
-    public int insertZsItemHistory(ZsItemHistory zsItemHistory);
-
-    /**
-     * 修改物料历史
-
-     * 
-     * @param zsItemHistory 物料历史
-
-     * @return 结果
-     */
-    public int updateZsItemHistory(ZsItemHistory zsItemHistory);
 
     /**
      * 删除物料历史
 
      * 
-     * @param eventId 物料历史
-主键
+     * @param eventId 物料历史主键
      * @return 结果
      */
     public int deleteZsItemHistoryByEventId(Long eventId);

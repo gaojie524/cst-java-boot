@@ -1,8 +1,9 @@
 package com.zc.system.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+//import org.apache.ibatis.annotations.Param;
 import com.zc.system.domain.SysUserRole;
+import io.lettuce.core.dynamic.annotation.Param;
 
 /**
  * 用户与角色关联表 数据层

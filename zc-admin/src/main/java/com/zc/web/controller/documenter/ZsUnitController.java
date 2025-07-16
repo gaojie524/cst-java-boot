@@ -2,6 +2,8 @@ package com.zc.web.controller.documenter;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.zc.documenter.domain.ZsUnit;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +18,16 @@ import com.zc.common.annotation.Log;
 import com.zc.common.core.controller.BaseController;
 import com.zc.common.core.domain.AjaxResult;
 import com.zc.common.enums.BusinessType;
-import com.zc.documenter.domain.ZsUnit;
+
 import com.zc.documenter.service.IZsUnitService;
 import com.zc.common.utils.poi.ExcelUtil;
 import com.zc.common.core.page.TableDataInfo;
 
 /**
- * 单位Controller
+ * 单位管理Controller
  * 
  * @author ruoyi
- * @date 2025-07-11
+ * @date 2025-07-16
  */
 @RestController
 @RequestMapping("/documenter/unit")
@@ -35,7 +37,7 @@ public class ZsUnitController extends BaseController
     private IZsUnitService zsUnitService;
 
     /**
-     * 查询单位列表
+     * 查询单位管理列表
      */
     @PreAuthorize("@ss.hasPermi('documenter:unit:list')")
     @GetMapping("/list")
@@ -47,20 +49,20 @@ public class ZsUnitController extends BaseController
     }
 
     /**
-     * 导出单位列表
+     * 导出单位管理列表
      */
     @PreAuthorize("@ss.hasPermi('documenter:unit:export')")
-    @Log(title = "单位", businessType = BusinessType.EXPORT)
+    @Log(title = "单位管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ZsUnit zsUnit)
     {
         List<ZsUnit> list = zsUnitService.selectZsUnitList(zsUnit);
         ExcelUtil<ZsUnit> util = new ExcelUtil<ZsUnit>(ZsUnit.class);
-        util.exportExcel(response, list, "单位数据");
+        util.exportExcel(response, list, "单位管理数据");
     }
 
     /**
-     * 获取单位详细信息
+     * 获取单位管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('documenter:unit:query')")
     @GetMapping(value = "/{unitId}")
@@ -70,35 +72,32 @@ public class ZsUnitController extends BaseController
     }
 
     /**
-     * 新增单位
+     * 新增单位管理
      */
     @PreAuthorize("@ss.hasPermi('documenter:unit:add')")
-    @Log(title = "单位", businessType = BusinessType.INSERT)
+    @Log(title = "单位管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZsUnit zsUnit)
     {
-        zsUnit.setCreateBy(getUsername());
-        zsUnit.setUpdateBy(getUsername());
         return toAjax(zsUnitService.insertZsUnit(zsUnit));
     }
 
     /**
-     * 修改单位
+     * 修改单位管理
      */
     @PreAuthorize("@ss.hasPermi('documenter:unit:edit')")
-    @Log(title = "单位", businessType = BusinessType.UPDATE)
+    @Log(title = "单位管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZsUnit zsUnit)
     {
-        zsUnit.setUpdateBy(getUsername());
         return toAjax(zsUnitService.updateZsUnit(zsUnit));
     }
 
     /**
-     * 删除单位
+     * 删除单位管理
      */
     @PreAuthorize("@ss.hasPermi('documenter:unit:remove')")
-    @Log(title = "单位", businessType = BusinessType.DELETE)
+    @Log(title = "单位管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{unitIds}")
     public AjaxResult remove(@PathVariable Long[] unitIds)
     {

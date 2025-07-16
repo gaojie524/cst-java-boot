@@ -93,8 +93,6 @@ public class ZsItemController extends BaseController
         ZsItemHistory zsItemHistory = new ZsItemHistory();
         zsItem.setItemId((long)Math.abs(UUID.randomUUID().toString().hashCode()));
         zsItem.setItemCode(UUID.randomUUID().toString());
-        zsItem.setCreateBy(getUsername());
-        zsItem.setUpdateBy(getUsername());
         //往物料历史表 增加记录
         BeanUtils.copyProperties(zsItem, zsItemHistory);
         zsItemHistory.setOperation("0");
@@ -111,7 +109,6 @@ public class ZsItemController extends BaseController
     public AjaxResult edit(@RequestBody ZsItem zsItem)
     {
         ZsItemHistory zsItemHistory = new ZsItemHistory();
-        zsItem.setUpdateBy(getUsername());
         //往物料历史表 增加记录
         BeanUtils.copyProperties(zsItem, zsItemHistory);
         zsItemHistory.setOperation("1");
@@ -132,7 +129,6 @@ public class ZsItemController extends BaseController
             ZsItemHistory zsItemHistory = new ZsItemHistory();
             BeanUtils.copyProperties(zsItem,zsItemHistory);
             zsItemHistory.setOperation("2");
-            zsItemHistory.setUpdateBy(getUsername());
             zsItemHistoryService.insertZsItemHistory(zsItemHistory);
         }
         return toAjax(zsItemService.deleteZsItemByItemIds(itemIds));

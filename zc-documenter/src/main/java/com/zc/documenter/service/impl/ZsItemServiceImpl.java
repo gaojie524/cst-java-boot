@@ -3,6 +3,7 @@ package com.zc.documenter.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zc.common.exception.ServiceException;
 import com.zc.common.utils.DateUtils;
 import com.zc.common.utils.StringUtils;
@@ -24,7 +25,7 @@ import javax.validation.Validator;
  * @date 2025-07-10
  */
 @Service
-public class ZsItemServiceImpl implements IZsItemService
+public class ZsItemServiceImpl extends ServiceImpl<ZsItemMapper, ZsItem> implements IZsItemService
 {
     @Autowired
     private ZsItemMapper zsItemMapper;
@@ -57,30 +58,28 @@ public class ZsItemServiceImpl implements IZsItemService
         return zsItemMapper.selectZsItemList(zsItem);
     }
 
+
     /**
-     * 新增物料
+     * 新增物料管理
      *
-     * @param zsItem 物料
+     * @param zsItem 物料管理
      * @return 结果
      */
     @Override
-    public int insertZsItem(ZsItem zsItem)
-    {
-        zsItem.setCreateTime(DateUtils.getNowDate());
-        return zsItemMapper.insertZsItem(zsItem);
+    public int insertZsItem(ZsItem zsItem) {
+        return zsItemMapper.insert(zsItem);
     }
 
     /**
-     * 修改物料
+     * 修改物料管理
      *
-     * @param zsItem 物料
+     * @param zsItem 物料管理
      * @return 结果
      */
     @Override
-    public int updateZsItem(ZsItem zsItem)
-    {
-        zsItem.setUpdateTime(DateUtils.getNowDate());
-        return zsItemMapper.updateZsItem(zsItem);
+    public int updateZsItem(ZsItem zsItem) {
+        return zsItemMapper.updateById(zsItem);
+
     }
 
     /**
@@ -131,7 +130,7 @@ public class ZsItemServiceImpl implements IZsItemService
                     zsItem.setItemId((long)Math.abs(UUID.randomUUID().toString().hashCode()));
                     zsItem.setCreateBy(operName);
                     zsItem.setCreationMethod("1");
-                    zsItemMapper.insertZsItem(zsItem);
+                    zsItemMapper.insert(zsItem);
                     successNum++;
                     successMsg.append("<br/>" + successNum + "物料 " + zsItem.getItemCode() + " 导入成功");
                 }

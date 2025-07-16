@@ -1,6 +1,8 @@
 package com.zc.documenter.service.impl;
 
 import java.util.List;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
 import com.zc.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,22 +11,22 @@ import com.zc.documenter.domain.ZsUnit;
 import com.zc.documenter.service.IZsUnitService;
 
 /**
- * 单位Service业务层处理
- * 
+ * 单位管理Service业务层处理
+ *
  * @author ruoyi
- * @date 2025-07-11
+ * @date 2025-07-16
  */
 @Service
-public class ZsUnitServiceImpl implements IZsUnitService 
+public class ZsUnitServiceImpl extends ServiceImpl<ZsUnitMapper, ZsUnit> implements IZsUnitService
 {
     @Autowired
     private ZsUnitMapper zsUnitMapper;
 
     /**
-     * 查询单位
-     * 
-     * @param unitId 单位主键
-     * @return 单位
+     * 查询单位管理
+     *
+     * @param unitId 单位管理主键
+     * @return 单位管理
      */
     @Override
     public ZsUnit selectZsUnitByUnitId(Long unitId)
@@ -33,10 +35,10 @@ public class ZsUnitServiceImpl implements IZsUnitService
     }
 
     /**
-     * 查询单位列表
-     * 
-     * @param zsUnit 单位
-     * @return 单位
+     * 查询单位管理列表
+     *
+     * @param zsUnit 单位管理
+     * @return 单位管理
      */
     @Override
     public List<ZsUnit> selectZsUnitList(ZsUnit zsUnit)
@@ -45,35 +47,33 @@ public class ZsUnitServiceImpl implements IZsUnitService
     }
 
     /**
-     * 新增单位
-     * 
-     * @param zsUnit 单位
+     * 新增单位管理
+     *
+     * @param zsUnit 单位管理
      * @return 结果
      */
     @Override
     public int insertZsUnit(ZsUnit zsUnit)
     {
-        zsUnit.setCreateTime(DateUtils.getNowDate());
-        return zsUnitMapper.insertZsUnit(zsUnit);
+        return zsUnitMapper.insert(zsUnit);
     }
 
     /**
-     * 修改单位
-     * 
-     * @param zsUnit 单位
+     * 修改单位管理
+     *
+     * @param zsUnit 单位管理
      * @return 结果
      */
     @Override
     public int updateZsUnit(ZsUnit zsUnit)
     {
-        zsUnit.setUpdateTime(DateUtils.getNowDate());
-        return zsUnitMapper.updateZsUnit(zsUnit);
+        return zsUnitMapper.updateById(zsUnit);
     }
 
     /**
-     * 批量删除单位
-     * 
-     * @param unitIds 需要删除的单位主键
+     * 批量删除单位管理
+     *
+     * @param unitIds 需要删除的单位管理主键
      * @return 结果
      */
     @Override
@@ -83,9 +83,9 @@ public class ZsUnitServiceImpl implements IZsUnitService
     }
 
     /**
-     * 删除单位信息
-     * 
-     * @param unitId 单位主键
+     * 删除单位管理信息
+     *
+     * @param unitId 单位管理主键
      * @return 结果
      */
     @Override

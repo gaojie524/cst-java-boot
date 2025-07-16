@@ -1,6 +1,8 @@
 package com.zc.documenter.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zc.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ Service业务层处理
  * @date 2025-07-10
  */
 @Service
-public class ZsItemHistoryServiceImpl implements IZsItemHistoryService 
+public class ZsItemHistoryServiceImpl extends ServiceImpl<ZsItemHistoryMapper, ZsItemHistory> implements IZsItemHistoryService
 {
     @Autowired
     private ZsItemHistoryMapper zsItemHistoryMapper;
@@ -37,8 +39,7 @@ public class ZsItemHistoryServiceImpl implements IZsItemHistoryService
     }
 
     /**
-     * 查询物料历史
-列表
+     * 查询物料历史列表
      * 
      * @param zsItemHistory 物料历史
 
@@ -54,31 +55,28 @@ public class ZsItemHistoryServiceImpl implements IZsItemHistoryService
     /**
      * 新增物料历史
 
-     * 
+     *
      * @param zsItemHistory 物料历史
 
      * @return 结果
      */
     @Override
-    public int insertZsItemHistory(ZsItemHistory zsItemHistory)
-    {
-        zsItemHistory.setCreateTime(DateUtils.getNowDate());
-        return zsItemHistoryMapper.insertZsItemHistory(zsItemHistory);
+    public int insertZsItemHistory(ZsItemHistory zsItemHistory) {
+        return zsItemHistoryMapper.insert(zsItemHistory);
     }
 
     /**
      * 修改物料历史
 
-     * 
+     *
      * @param zsItemHistory 物料历史
 
      * @return 结果
      */
     @Override
-    public int updateZsItemHistory(ZsItemHistory zsItemHistory)
-    {
-        zsItemHistory.setUpdateTime(DateUtils.getNowDate());
-        return zsItemHistoryMapper.updateZsItemHistory(zsItemHistory);
+    public int updateZsItemHistory(ZsItemHistory zsItemHistory) {
+        return zsItemHistoryMapper.updateById(zsItemHistory);
+
     }
 
     /**

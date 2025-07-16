@@ -79,8 +79,6 @@ public class ZsProcessController extends BaseController
     public AjaxResult add(@RequestBody ZsProcess zsProcess)
     {
         zsProcess.setProcessCode(UUID.randomUUID().toString());
-        zsProcess.setCreateBy(getUsername());
-        zsProcess.setUpdateBy(getUsername());
         return toAjax(zsProcessService.insertZsProcess(zsProcess));
     }
 
@@ -92,7 +90,6 @@ public class ZsProcessController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ZsProcess zsProcess)
     {
-        zsProcess.setUpdateBy(getUsername());
         return toAjax(zsProcessService.updateZsProcess(zsProcess));
     }
 

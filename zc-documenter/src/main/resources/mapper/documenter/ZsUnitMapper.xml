@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zc.documenter.mapper.ZsUnitMapper">
-    
-    <resultMap type="ZsUnit" id="ZsUnitResult">
+
+    <resultMap type="com.zc.documenter.domain.ZsUnit" id="ZsUnitResult">
         <result property="unitId"    column="unit_id"    />
         <result property="unitCode"    column="unit_code"    />
         <result property="unitName"    column="unit_name"    />
@@ -25,9 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select unit_id, unit_code, unit_name, unit_description, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag from zs_unit
     </sql>
 
-    <select id="selectZsUnitList" parameterType="ZsUnit" resultMap="ZsUnitResult">
+    <select id="selectZsUnitList" parameterType="com.zc.documenter.domain.ZsUnit" resultMap="ZsUnitResult">
         <include refid="selectZsUnitVo"/>
-        <where>  
+        <where>
             <if test="unitCode != null  and unitCode != ''"> and unit_code = #{unitCode}</if>
             <if test="unitName != null  and unitName != ''"> and unit_name like concat('%', #{unitName}, '%')</if>
             <if test="unitDescription != null  and unitDescription != ''"> and unit_description = #{unitDescription}</if>
@@ -36,16 +36,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark3 != null  and remark3 != ''"> and remark3 = #{remark3}</if>
             <if test="remark4 != null  and remark4 != ''"> and remark4 = #{remark4}</if>
             <if test="remark5 != null  and remark5 != ''"> and remark5 = #{remark5}</if>
-            and delete_id = 0
+             and delete_id = 0
         </where>
     </select>
-    
+
     <select id="selectZsUnitByUnitId" parameterType="Long" resultMap="ZsUnitResult">
         <include refid="selectZsUnitVo"/>
         where unit_id = #{unitId}
     </select>
 
-    <insert id="insertZsUnit" parameterType="ZsUnit" useGeneratedKeys="true" keyProperty="unitId">
+    <insert id="insertZsUnit" parameterType="com.zc.documenter.domain.ZsUnit" useGeneratedKeys="true" keyProperty="unitId">
         insert into zs_unit
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="unitCode != null and unitCode != ''">unit_code,</if>
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null and updateBy != ''">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="lastUpdateFlag != null">last_update_flag,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="unitCode != null and unitCode != ''">#{unitCode},</if>
             <if test="unitName != null and unitName != ''">#{unitName},</if>
@@ -76,10 +76,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="lastUpdateFlag != null">#{lastUpdateFlag},</if>
-         </trim>
+        </trim>
     </insert>
 
-    <update id="updateZsUnit" parameterType="ZsUnit">
+    <update id="updateZsUnit" parameterType="com.zc.documenter.domain.ZsUnit">
         update zs_unit
         <trim prefix="SET" suffixOverrides=",">
             <if test="unitCode != null and unitCode != ''">unit_code = #{unitCode},</if>
@@ -102,6 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteZsUnitByUnitId" parameterType="Long">
         delete from zs_unit where unit_id = #{unitId}
     </delete>
+
 
     <delete id="deleteZsUnitByUnitIds" parameterType="String">
         UPDATE zs_unit

@@ -58,6 +58,12 @@
             <groupId>com.zc</groupId>
             <artifactId>zc-system</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>3.5.3.2</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

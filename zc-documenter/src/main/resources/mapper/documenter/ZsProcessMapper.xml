@@ -42,65 +42,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where process_id = #{processId}
     </select>
 
-    <insert id="insertZsProcess" parameterType="ZsProcess" useGeneratedKeys="true" keyProperty="processId">
-        insert into zs_process
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="processCode != null">process_code,</if>
-            <if test="processName != null">process_name,</if>
-            <if test="processDesc != null">process_desc,</if>
-            <if test="processStatus != null and processStatus != ''">process_status,</if>
-            <if test="creationMethod != null and creationMethod != ''">creation_method,</if>
-            <if test="remark1 != null">remark1,</if>
-            <if test="remark2 != null">remark2,</if>
-            <if test="remark3 != null">remark3,</if>
-            <if test="remark4 != null">remark4,</if>
-            <if test="remark5 != null">remark5,</if>
-            <if test="createBy != null">create_by,</if>
-            <if test="createTime != null">create_time,</if>
-            <if test="updateBy != null">update_by,</if>
-            <if test="updateTime != null">update_time,</if>
-            <if test="lastUpdateFlag != null">last_update_flag,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="processCode != null">#{processCode},</if>
-            <if test="processName != null">#{processName},</if>
-            <if test="processDesc != null">#{processDesc},</if>
-            <if test="processStatus != null and processStatus != ''">#{processStatus},</if>
-            <if test="creationMethod != null and creationMethod != ''">#{creationMethod},</if>
-            <if test="remark1 != null">#{remark1},</if>
-            <if test="remark2 != null">#{remark2},</if>
-            <if test="remark3 != null">#{remark3},</if>
-            <if test="remark4 != null">#{remark4},</if>
-            <if test="remark5 != null">#{remark5},</if>
-            <if test="createBy != null">#{createBy},</if>
-            <if test="createTime != null">#{createTime},</if>
-            <if test="updateBy != null">#{updateBy},</if>
-            <if test="updateTime != null">#{updateTime},</if>
-            <if test="lastUpdateFlag != null">#{lastUpdateFlag},</if>
-         </trim>
-    </insert>
-
-    <update id="updateZsProcess" parameterType="ZsProcess">
-        update zs_process
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="processCode != null">process_code = #{processCode},</if>
-            <if test="processName != null">process_name = #{processName},</if>
-            <if test="processDesc != null">process_desc = #{processDesc},</if>
-            <if test="processStatus != null and processStatus != ''">process_status = #{processStatus},</if>
-            <if test="creationMethod != null and creationMethod != ''">creation_method = #{creationMethod},</if>
-            <if test="remark1 != null">remark1 = #{remark1},</if>
-            <if test="remark2 != null">remark2 = #{remark2},</if>
-            <if test="remark3 != null">remark3 = #{remark3},</if>
-            <if test="remark4 != null">remark4 = #{remark4},</if>
-            <if test="remark5 != null">remark5 = #{remark5},</if>
-            <if test="createBy != null">create_by = #{createBy},</if>
-            <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="updateBy != null">update_by = #{updateBy},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="lastUpdateFlag != null">last_update_flag = #{lastUpdateFlag},</if>
-        </trim>
-        where process_id = #{processId}
-    </update>
 
     <delete id="deleteZsProcessByProcessId" parameterType="Long">
         delete from zs_process where process_id = #{processId}
