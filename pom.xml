@@ -4,16 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
+    <groupId>com.zc</groupId>
+    <artifactId>zc</artifactId>
     <version>3.9.0</version>
 
-    <name>ruoyi</name>
-    <url>http://www.ruoyi.vip</url>
     <description>云帆EMS管理系统</description>
     
     <properties>
-        <ruoyi.version>3.9.0</ruoyi.version>
+        <zc.version>3.9.0</zc.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -187,44 +185,44 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-quartz</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.zc</groupId>
+                <artifactId>zc-quartz</artifactId>
+                <version>${zc.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-generator</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.zc</groupId>
+                <artifactId>zc-generator</artifactId>
+                <version>${zc.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.zc</groupId>
+                <artifactId>zc-framework</artifactId>
+                <version>${zc.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.zc</groupId>
+                <artifactId>zc-system</artifactId>
+                <version>${zc.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.zc</groupId>
+                <artifactId>zc-common</artifactId>
+                <version>${zc.version}</version>
             </dependency>
 
             <!-- 基础资料-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.zc</groupId>
                 <artifactId>zc-documenter</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${zc.version}</version>
             </dependency>
             <!-- MyBatis-Plus依赖 -->
             <dependency>
@@ -232,21 +230,16 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>cn.hutool</groupId>-->
-<!--                <artifactId>hutool-all</artifactId>-->
-<!--                <version>${hutool-all.version}</version>-->
-<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
     <modules>
-        <module>ruoyi-admin</module>
-        <module>ruoyi-framework</module>
-        <module>ruoyi-system</module>
-        <module>ruoyi-quartz</module>
-        <module>ruoyi-generator</module>
-        <module>ruoyi-common</module>
+        <module>zc-admin</module>
+        <module>zc-framework</module>
+        <module>zc-system</module>
+        <module>zc-quartz</module>
+        <module>zc-generator</module>
+        <module>zc-common</module>
         <module>zc-documenter</module>
     </modules>
     <packaging>pom</packaging>
