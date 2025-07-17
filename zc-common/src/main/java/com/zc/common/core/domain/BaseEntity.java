@@ -21,6 +21,7 @@ public class BaseEntity implements Serializable
     private static final long serialVersionUID = 1L;
 
     /** 搜索值 */
+    @TableField(exist = false)
     @JsonIgnore
     private String searchValue;
 
@@ -29,7 +30,7 @@ public class BaseEntity implements Serializable
     private String createBy;
 
     /** 创建时间 */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
@@ -43,6 +44,7 @@ public class BaseEntity implements Serializable
     private Date updateTime;
 
     /** 备注 */
+    @TableField(exist = false)
     private String remark;
 
     /** 请求参数 */

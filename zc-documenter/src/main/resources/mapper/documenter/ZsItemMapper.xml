@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZsItemList" parameterType="ZsItem" resultMap="ZsItemResult">
         <include refid="selectZsItemVo"/>
-        <where>  
+        <where>
             <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
             <if test="unitCode != null  and unitCode != ''"> and unit_code = #{unitCode}</if>
             <if test="itemCategory != null  and itemCategory != ''"> and item_category = #{itemCategory}</if>
@@ -47,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lastUpdateFlag != null  and lastUpdateFlag != ''"> and last_update_flag = #{lastUpdateFlag}</if>
              and delete_id = 0
         </where>
+        order By create_time DESC
     </select>
     
     <select id="selectZsItemByItemId" parameterType="Long" resultMap="ZsItemResult">

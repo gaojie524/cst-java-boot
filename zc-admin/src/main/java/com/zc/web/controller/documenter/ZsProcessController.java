@@ -3,6 +3,8 @@ package com.zc.web.controller.documenter;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
+
+import com.zc.documenter.domain.ZsItem;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ import com.zc.documenter.domain.ZsProcess;
 import com.zc.documenter.service.IZsProcessService;
 import com.zc.common.utils.poi.ExcelUtil;
 import com.zc.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 工序Controller
@@ -102,5 +105,26 @@ public class ZsProcessController extends BaseController
     public AjaxResult remove(@PathVariable Long[] processIds)
     {
         return toAjax(zsProcessService.deleteZsProcessByProcessIds(processIds));
+    }
+
+
+    @Log(title = "工序管理", businessType = BusinessType.IMPORT)
+    @PreAuthorize("@ss.hasPermi('documenter:process:import')")
+    @PostMapping("/importData")
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<ZsProcess> util = new ExcelUtil<ZsProcess>(ZsProcess.class);
+        List<ZsProcess> processList = util.importExcel(file.getInputStream());
+        String operName = getUsername();
+        String message = zsProcessService.importProcess(processList, updateSupport, operName);
+        return success(message);
+    }
+
+
+    @PostMapping("/importTemplate")
+    public void importTemplate(HttpServletResponse response)
+    {
+        ExcelUtil<ZsProcess> util = new ExcelUtil<ZsProcess>(ZsProcess.class);
+        util.importTemplateExcel(response, "工序数据");
     }
 }

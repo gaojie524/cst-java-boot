@@ -136,15 +136,12 @@ public class ZsItemServiceImpl extends ServiceImpl<ZsItemMapper, ZsItem> impleme
                 }
                 else if (isUpdateSupport)
                 {
-//                    BeanValidators.validateWithException(validator, zsItem);
-//                    checkzsItemAllowed(u);
-//                    checkzsItemDataScope(u.getzsItemId());
-//                    deptService.checkDeptDataScope(zsItem.getDeptId());
-//                    zsItem.setzsItemId(u.getzsItemId());
-//                    zsItem.setUpdateBy(operName);
-//                    zsItemMapper.updatezsItem(zsItem);
-//                    successNum++;
-//                    successMsg.append("<br/>" + successNum + "、账号 " + zsItem.getzsItemName() + " 更新成功");
+                    BeanValidators.validateWithException(validator, zsItem);
+                    zsItem.setItemId(z.getItemId());
+                    zsItem.setCreationMethod("1");
+                    zsItemMapper.updateById(zsItem);
+                    successNum++;
+                    successMsg.append("<br/>" + successNum + "、账号 " + zsItem.getItemCode() + " 更新成功");
                 }
                 else
                 {

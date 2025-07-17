@@ -42,7 +42,7 @@ public class ZsProcess extends BaseEntity
     private String processStatus;
 
     /** 创建方式  前台录入/模板导入/接口导入 */
-    @Excel(name = "创建方式  前台录入/模板导入/接口导入")
+//    @Excel(name = "创建方式  前台录入/模板导入/接口导入")
     private String creationMethod;
 
     /** 备注1 */
@@ -66,7 +66,7 @@ public class ZsProcess extends BaseEntity
     private String remark5;
 
     /** 最后更新标识 */
-    @Excel(name = "最后更新标识")
+//    @Excel(name = "最后更新标识")
     private String lastUpdateFlag;
 
 }
