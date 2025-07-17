@@ -35,6 +35,8 @@
         <spring-framework.version>5.3.39</spring-framework.version>
         <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
         <projectlombok.version>1.18.22</projectlombok.version>
+<!--        <hutool.version>5.8.20</hutool.version>-->
+
 
     </properties>
 
@@ -235,18 +237,29 @@
                 <artifactId>zc-documenter</artifactId>
                 <version>${zc.version}</version>
             </dependency>
+            <!-- 组织建模-->
+            <dependency>
+                <groupId>com.zc</groupId>
+                <artifactId>zc-organization</artifactId>
+                <version>${zc.version}</version>
+            </dependency>
             <!-- MyBatis-Plus依赖 -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
-
+            <!--  日志依赖  -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${projectlombok.version}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>cn.hutool</groupId>-->
+<!--                <artifactId>hutool-all</artifactId>-->
+<!--                <version>${hutool.version}</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -258,6 +271,7 @@
         <module>zc-generator</module>
         <module>zc-common</module>
         <module>zc-documenter</module>
+        <module>zc-organization</module>
     </modules>
     <packaging>pom</packaging>
 

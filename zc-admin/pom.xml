@@ -68,6 +68,13 @@
             <version>${zc.version}</version>
         </dependency>
 
+        <!-- 组织建模-->
+        <dependency>
+            <groupId>com.zc</groupId>
+            <artifactId>zc-organization</artifactId>
+            <version>${zc.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>

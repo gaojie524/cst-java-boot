@@ -2,9 +2,9 @@ package com.zc.system.mapper;
 
 import java.util.List;
 
-//import io.lettuce.core.dynamic.annotation.Param;
+
 import com.zc.common.core.domain.entity.SysUser;
-import io.lettuce.core.dynamic.annotation.Param;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户表 数据层
