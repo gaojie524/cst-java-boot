@@ -175,3 +175,10 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+#minio配置
+minio:
+  endpoint: http://47.107.141.88:9000 # minio地址
+  access-key: root # 账号
+  secret-key: 12345678 # 密码
+  bucket-name: test # 存储桶名称

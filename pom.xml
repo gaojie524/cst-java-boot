@@ -35,9 +35,8 @@
         <spring-framework.version>5.3.39</spring-framework.version>
         <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
         <projectlombok.version>1.18.22</projectlombok.version>
-<!--        <hutool.version>5.8.20</hutool.version>-->
-
-
+        <minio.version>8.5.7</minio.version>
+        <okhttp.version>4.10.0</okhttp.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -255,11 +254,16 @@
                 <artifactId>lombok</artifactId>
                 <version>${projectlombok.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>cn.hutool</groupId>-->
-<!--                <artifactId>hutool-all</artifactId>-->
-<!--                <version>${hutool.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
