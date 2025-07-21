@@ -9,6 +9,7 @@ import com.zc.common.core.domain.entity.SysDept;
 import com.zc.common.core.domain.entity.SysMenu;
 import com.zc.common.utils.StringUtils;
 
+
 /**
  * Treeselect树结构实体类
  * 
@@ -26,6 +27,9 @@ public class TreeSelect implements Serializable
 
     /** 节点禁用 */
     private boolean disabled = false;
+
+    /** 父节点ID */
+    private Long parentId;
 
     /** 子节点 */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -51,6 +55,7 @@ public class TreeSelect implements Serializable
         this.children = menu.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
+
     public Long getId()
     {
         return id;
@@ -59,6 +64,16 @@ public class TreeSelect implements Serializable
     public void setId(Long id)
     {
         this.id = id;
+    }
+
+    public Long getParentId()
+    {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId)
+    {
+        this.parentId = parentId;
     }
 
     public String getLabel()

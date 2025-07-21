@@ -29,7 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <sql id="selectZsItemVoByDeleteId">
-        and delete_id = 0    </sql>
+        and delete_id = 0
+    </sql>
 
     <select id="selectZsItemList" parameterType="ZsItem" resultMap="ZsItemResult">
         <include refid="selectZsItemVo"/>
@@ -45,6 +46,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark4 != null  and remark4 != ''"> and remark4 = #{remark4}</if>
             <if test="remark5 != null  and remark5 != ''"> and remark5 = #{remark5}</if>
             <if test="lastUpdateFlag != null  and lastUpdateFlag != ''"> and last_update_flag = #{lastUpdateFlag}</if>
+            <if test="searchValue != null  and searchValue != ''">
+                and item_code like concat('%', #{searchValue}, '%')
+                or item_name like concat('%', #{searchValue}, '%')
+            </if>
              and delete_id = 0
         </where>
         order By create_time DESC

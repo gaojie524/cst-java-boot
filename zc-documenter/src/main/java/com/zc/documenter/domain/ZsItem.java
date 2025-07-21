@@ -51,23 +51,23 @@ public class ZsItem extends BaseEntity
     private String creationMethod;
 
     /** 备注1 */
-    @Excel(name = "备注1")
+
     private String remark1;
 
     /** 备注2 */
-    @Excel(name = "备注2")
+
     private String remark2;
 
     /** 备注3 */
-    @Excel(name = "备注3")
+
     private String remark3;
 
     /** 备注4 */
-    @Excel(name = "备注4")
+
     private String remark4;
 
     /** 备注5 */
-    @Excel(name = "备注5")
+
     private String remark5;
 
     /** 最后更新标识 */
