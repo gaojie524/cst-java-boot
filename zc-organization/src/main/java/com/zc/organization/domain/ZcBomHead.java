@@ -21,10 +21,11 @@ import java.util.List;
 @TableName("zc_bom_head")
 public class ZcBomHead extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID=1L;
+
 
     /** BOM头表ID */
-    @TableId(value = "bom_head_id", type = IdType.AUTO)
+    @TableId(value = "bom_head_id",type = IdType.AUTO)
     private Long bomHeadId;
 
     /** BOM头表编码 */
@@ -75,7 +76,19 @@ public class ZcBomHead extends BaseEntity {
     @TableField(exist = false)
     private String itemName;
 
+    /** 行表id */
+    @TableField(exist = false)
+    private Long bomLineId;
+
+    /** 行表排序*/
+    @TableField(exist = false)
+    private Long sortOrder;
+
+    /** 行表连接id*/
+    @TableField(exist = false)
+    private Long bomHeadLineId;
+
     /** 子部门 */
     @TableField(exist = false)
-    private List<ZcBomLine> children = new ArrayList<ZcBomLine>();
+    private List<ZcBomHead> children = new ArrayList<ZcBomHead>();
 }

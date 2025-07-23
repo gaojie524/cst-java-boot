@@ -67,7 +67,7 @@ public interface IZcBomHeadService extends IService<ZcBomHead> {
      * @param
      * @return 部门树信息集合
      */
-    public List<TreeSelect> selectBomTreeList(ZcBomHead zcBomHead);
+    public List<ZcBomHead> selectBomTreeList(ZcBomHead zcBomHead);
 
     /**
      * 构建前端所需要下拉树结构
@@ -75,5 +75,5 @@ public interface IZcBomHeadService extends IService<ZcBomHead> {
      * @param zcBomHeads 部门列表
      * @return 下拉树结构列表
      */
-    List<TreeSelect> buildBOMTreeSelect(List<ZcBomHead> zcBomHeads);
+    List<ZcBomHead> buildBOMTreeSelect(List<ZcBomHead> zcBomHeads);
 }
