@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
     <groupId>com.zc</groupId>
-    <artifactId>zc</artifactId>
+    <artifactId>cst</artifactId>
     <version>3.9.0</version>
 
     <description>云帆EMS管理系统</description>
@@ -264,6 +264,18 @@
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.5.21</version>
+                <scope>compile</scope>
+            </dependency>
+
+
+
+
         </dependencies>
     </dependencyManagement>
 
