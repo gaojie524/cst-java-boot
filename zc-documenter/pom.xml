@@ -37,6 +37,35 @@
         <artifactId>zc</artifactId>
         <version>3.9.0</version>
     </dependency>
+    <dependency>
+        <groupId>io.swagger</groupId>
+        <artifactId>swagger-annotations</artifactId>
+        <version>1.6.2</version>
+        <scope>compile</scope>
+    </dependency>
+    <!-- 阿里云短信服务核心SDK -->
+    <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>dysmsapi20170525</artifactId>
+        <version>2.0.20</version>
+    </dependency>
+
+    <!-- 阿里云OpenAPI核心库 -->
+    <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>tea-openapi</artifactId>
+        <version>0.2.1</version>
+    </dependency>
+
+
+
+    <!-- JSON处理库 -->
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.8</version>
+    </dependency>
+
 </dependencies>
 
 </project>

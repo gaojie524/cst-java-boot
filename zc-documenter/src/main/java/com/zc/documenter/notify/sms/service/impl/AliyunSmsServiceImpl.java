@@ -1,8 +1,7 @@
 package com.zc.documenter.notify.sms.service.impl;
 
 
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.exceptions.ClientException;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.zc.documenter.notify.sms.entity.SmsResult;
 import com.zc.documenter.notify.sms.service.SmsService;
 import com.zc.documenter.notify.sms.utils.AliyunSmsClient;
