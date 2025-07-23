@@ -43,6 +43,9 @@ public interface ZsBomHeadMapper extends BaseMapper<ZsBomHead> {
      * 批量删除BOM头表
      *
      * @param bomHeadIds 需要删除的数据主键集合
+     * @param
      * @return 结果
      */
-    public int deleteZsBomHeadByBomHeadIds(Long[] bomHeadIds);}
+
+    public int deleteZsBomHeadByBomHeadIds(Long[] bomHeadIds);
+}

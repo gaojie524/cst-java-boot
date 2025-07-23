@@ -2,6 +2,10 @@ package com.zc.web.controller.organization;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zc.organization.domain.ZsBomHead;
+import com.zc.organization.service.IZsBomHeadService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +37,9 @@ public class ZsBomLineController extends BaseController
 {
     @Autowired
     private IZsBomLineService zsBomLineService;
+
+    @Autowired
+    private IZsBomHeadService zsBomHeadService;
 
     /**
      * 查询BOM行列表

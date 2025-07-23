@@ -113,21 +113,6 @@ public class ZsBomHeadController extends BaseController
     @DeleteMapping("/{bomHeadIds}")
     public AjaxResult remove(@PathVariable Long[] bomHeadIds)
     {
-        // 遍历每个 BOM 头 ID
-        for (Long bomHeadId : bomHeadIds) {
-            // 查找 BOM 头的 BOM 线信息
-            ZsBomLine zsBomLine = new ZsBomLine();
-            zsBomLine.setBomHeadId(bomHeadId); // 设置 bomHeadId
-            List<ZsBomLine> zsBomLines = zsBomLineService.selectZsBomLineList(zsBomLine);
-
-            // 如果存在子节点，不能删除该 BOM 头
-            if (zsBomLines != null && !zsBomLines.isEmpty()) {
-                // 获取 BOM 头表编号
-                ZsBomHead zsBomHeadServiceById = zsBomHeadService.getById(bomHeadId);
-                return AjaxResult.warn("BOM头表编号 " + zsBomHeadServiceById.getBomCode() + " 存在子节点，无法删除!");
-            }
-        }
-
         // 如果没有任何 BOM 头存在子节点，进行删除操作
         return toAjax(zsBomHeadService.deleteZsBomHeadByBomHeadIds(bomHeadIds));
     }

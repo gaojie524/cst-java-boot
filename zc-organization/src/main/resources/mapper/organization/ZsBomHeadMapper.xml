@@ -54,8 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZsBomHeadVo"/>
         <where>
             <if test="bomHeadId != null  and bomHeadId != ''"> and zbh.bom_head_id = #{bomHeadId}</if>
-            <if test="bomCode != null  and bomCode != ''"> and zbh.bom_code = #{bomCode}</if>
-            <if test="bomVersion != null  and bomVersion != ''"> and zbh.bom_version = #{bomVersion}</if>
+            <if test="bomCode != null and bomCode != ''"> and zbh.bom_code LIKE CONCAT('%', #{bomCode}, '%')</if>
+            <if test="bomVersion != null and bomVersion != ''"> and zbh.bom_version LIKE CONCAT('%', #{bomVersion}, '%')</if>
             <if test="bomStatus != null  and bomStatus != ''"> and zbh.bom_status = #{bomStatus}</if>
             and zbh.delete_id = 0
         </where>

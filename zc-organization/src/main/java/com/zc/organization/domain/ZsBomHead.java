@@ -78,7 +78,19 @@ public class ZsBomHead extends BaseEntity {
     @TableField(exist = false)
     private String itemName;
 
+    /** 行表id */
+    @TableField(exist = false)
+    private Long bomLineId;
+
+    /** 行表排序*/
+    @TableField(exist = false)
+    private Long sortOrder;
+
+    /** 行表连接id*/
+    @TableField(exist = false)
+    private Long bomHeadLineId;
+
     /** 子部门 */
     @TableField(exist = false)
-    private List<ZsBomLine> children = new ArrayList<ZsBomLine>();
+    private List<ZsBomHead> children = new ArrayList<ZsBomHead>();
 }

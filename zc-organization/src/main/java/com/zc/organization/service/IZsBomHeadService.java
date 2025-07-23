@@ -3,7 +3,6 @@ package com.zc.organization.service;
 import java.util.List;
 
 
-import com.zc.common.core.domain.TreeSelect;
 import com.zc.organization.domain.ZsBomHead;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -49,7 +48,7 @@ public interface IZsBomHeadService extends IService<ZsBomHead> {
     /**
      * 批量删除BOM头表
      *
-     * @param bomHeadIds 需要删除的BOM头表主键集合
+     * @param bomHeadIds
      * @return 结果
      */
     public int deleteZsBomHeadByBomHeadIds(Long[] bomHeadIds);
@@ -68,7 +67,7 @@ public interface IZsBomHeadService extends IService<ZsBomHead> {
      * @param
      * @return 部门树信息集合
      */
-    public List<TreeSelect> selectBomTreeList(ZsBomHead zsBomHead);
+    public List<ZsBomHead> selectBomTreeList(ZsBomHead zsBomHead);
 
     /**
      * 构建前端所需要下拉树结构
@@ -76,7 +75,7 @@ public interface IZsBomHeadService extends IService<ZsBomHead> {
      * @param zsBomHeads 部门列表
      * @return 下拉树结构列表
      */
-    List<TreeSelect> buildBOMTreeSelect(List<ZsBomHead> zsBomHeads);
+    List<ZsBomHead> buildBOMTreeSelect(List<ZsBomHead> zsBomHeads);
 
 
 }

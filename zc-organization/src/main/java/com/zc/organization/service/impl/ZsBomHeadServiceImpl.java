@@ -2,12 +2,10 @@ package com.zc.organization.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
-import com.zc.common.core.domain.TreeSelect;
 import com.zc.common.utils.spring.SpringUtils;
 import com.zc.organization.domain.ZsBomLine;
 import com.zc.organization.mapper.ZsBomLineMapper;
@@ -79,7 +77,7 @@ public class ZsBomHeadServiceImpl extends ServiceImpl<ZsBomHeadMapper, ZsBomHead
     /**
      * 批量删除BOM头表
      *
-     * @param bomHeadIds 需要删除的BOM头表主键
+     * @param zsBomHead
      * @return 结果
      */
     @Override
@@ -106,9 +104,12 @@ public class ZsBomHeadServiceImpl extends ServiceImpl<ZsBomHeadMapper, ZsBomHead
      * @return 部门树信息集合
      */
     @Override
-    public List<TreeSelect> selectBomTreeList(ZsBomHead zsBomHead)
+    public List<ZsBomHead> selectBomTreeList(ZsBomHead zsBomHead)
     {
+        //只查有效的记录
+        zsBomHead.setBomStatus("Y");
         List<ZsBomHead> zsBomHeads = SpringUtils.getAopProxy(this).selectZsBomHeadList(zsBomHead);
+
         return buildBOMTreeSelect(zsBomHeads);
     }
 
@@ -119,62 +120,73 @@ public class ZsBomHeadServiceImpl extends ServiceImpl<ZsBomHeadMapper, ZsBomHead
      * @return 下拉树结构列表
      */
     @Override
-    public List<TreeSelect> buildBOMTreeSelect(List<ZsBomHead> zsBomHeads)
+    public List<ZsBomHead> buildBOMTreeSelect(List<ZsBomHead> zsBomHeads)
     {
-        List<ZsBomHead> bomTrees = recursionFn(zsBomHeads);
-        List<TreeSelect> treeSelects = new ArrayList<>();
-        bomTrees.forEach(tree -> {
-            TreeSelect treeSelect = new TreeSelect();  // 先创建一个 TreeSelect 对象
+        // 得到所有子级列表
+        List<ZsBomLine> childList = zsBomLineMapper.selectZsBomLineList(null);
 
-            // 手动设置 TreeSelect 对象的属性
-            treeSelect.setId(tree.getBomHeadId());  // 设置 id
-            treeSelect.setLabel(tree.getItemCode());  // 设置 label
+        List<ZsBomHead> returnList = new ArrayList<ZsBomHead>();
 
-            // 处理 children，递归地将 ZsBomHead 的 children 转换为 TreeSelect 对象
-            List<TreeSelect> children = tree.getChildren().stream()
-                    .map(child -> {
-                        TreeSelect childSelect = new TreeSelect();  // 创建子节点 TreeSelect
-                        childSelect.setId(child.getBomLineId());  // 设置子节点 id
-                        childSelect.setLabel(child.getItemCode());  // 设置子节点 label
-                        childSelect.setParentId(child.getBomHeadId()); //设置父级id
-                        return childSelect;
-                    })
+        // 遍历ZsBomHead和ZsBomLine表
+        for (ZsBomHead zsBomHead : zsBomHeads) {
+            // 查找匹配的子级
+            // 过滤出符合条件的子级
+            List<ZsBomLine> matchingChildren = childList.stream()
+                    .filter(child -> zsBomHead.getParentItemId().equals(child.getChildItemId()))
                     .collect(Collectors.toList());
 
-            treeSelect.setChildren(children);  // 设置 children
+            // 如果有匹配的子级，提取该对象
+            if (!matchingChildren.isEmpty()) {
+                continue;
+            }
+            recursionFn(returnList,zsBomHeads,childList,zsBomHead);
+            returnList.add(zsBomHead);
+        }
 
-            treeSelects.add(treeSelect);  // 将构造好的 TreeSelect 对象添加到列表
-        });
 
-        return treeSelects;
+
+
+        return returnList;
     }
 
     /**
      * 递归列表
      */
-    private List<ZsBomHead> recursionFn(List<ZsBomHead> list) {
-        // 得到所有子级列表
-        List<ZsBomLine> childList = zsBomLineMapper.selectZsBomLineList(null);
+    private void recursionFn(List<ZsBomHead> returnList, List<ZsBomHead> zsBomHeads, List<ZsBomLine> childList, ZsBomHead zsBomHead) {
 
-        // 遍历父级列表
-        for (ZsBomHead bomHead : list) {
-            // 获取当前父级的ID
-            Long parentId = bomHead.getBomHeadId();
+        for (ZsBomLine zsBomLine : childList) {
+            if (zsBomHead.getBomHeadId().equals(zsBomLine.getBomHeadId())) {
+                List<ZsBomHead> children = zsBomHead.getChildren();
 
-            // 根据父级ID过滤出该父级的直接子级
-            List<ZsBomLine> children = new ArrayList<>();
-            for (ZsBomLine bomLine : childList) {
-                if (bomLine.getBomHeadId().equals(parentId)) {
-                    children.add(bomLine);  // 将直接子级添加到父级的children中
+                // 查找匹配的父级
+                ZsBomHead matchingParent = zsBomHeads.stream()
+                        .filter(parentHead -> parentHead.getParentItemId().equals(zsBomLine.getChildItemId()))
+                        .findFirst()
+                        .orElse(null);
+
+                if (matchingParent != null) {
+                    // 设置父级数据
+                    matchingParent.setBomLineId(zsBomLine.getBomLineId());
+                    matchingParent.setSortOrder(zsBomLine.getSortOrder());
+                    matchingParent.setBomHeadLineId(zsBomLine.getBomHeadId());
+                    children.add(matchingParent);
+
+                    // 继续递归
+                    recursionFn(children, zsBomHeads, childList, matchingParent);
+
+                } else {
+                    // 如果没有找到匹配的父级，创建一个新的 ZsBomHead 对象
+                    ZsBomHead zsBomHead1 = new ZsBomHead();
+                    zsBomHead1.setBomLineId(zsBomLine.getBomLineId());
+                    zsBomHead1.setSortOrder(zsBomLine.getSortOrder());
+                    zsBomHead1.setParentItemId(zsBomLine.getChildItemId());
+                    zsBomHead1.setItemName(zsBomLine.getItemName());
+                    zsBomHead1.setItemCode(zsBomLine.getItemCode());
+                    zsBomHead1.setBomHeadId(zsBomLine.getBomHeadId());
+                    children.add(zsBomHead1);
                 }
             }
-
-            // 设置父级的children属性
-            bomHead.setChildren(children);
         }
-
-        return list;
     }
-
 
 }
