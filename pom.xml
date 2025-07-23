@@ -37,8 +37,6 @@
         <projectlombok.version>1.18.22</projectlombok.version>
         <minio.version>8.5.7</minio.version>
         <okhttp.version>4.10.0</okhttp.version>
-<!--        <hutool.version> 5.8.39</hutool.version>-->
-
     </properties>
 
     <!-- 依赖声明 -->
@@ -266,16 +264,6 @@
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>cn.hutool</groupId>-->
-<!--                <artifactId>hutool-all</artifactId>-->
-<!--                <version>${hutool.version}</version>-->
-<!--            </dependency>-->
-
-
-
-
-
         </dependencies>
     </dependencyManagement>
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.documenter.mapper.ZsItemMapper">
+    
+    <resultMap type="ZsItem" id="ZsItemResult">
+        <result property="itemId"    column="item_id"    />
+        <result property="itemCode"    column="item_code"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="unitCode"    column="unit_code"    />
+        <result property="itemCategory"    column="item_category"    />
+        <result property="itemStatus"    column="item_status"    />
+        <result property="creationMethod"    column="creation_method"    />
+        <result property="remark1"    column="remark1"    />
+        <result property="remark2"    column="remark2"    />
+        <result property="remark3"    column="remark3"    />
+        <result property="remark4"    column="remark4"    />
+        <result property="remark5"    column="remark5"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="lastUpdateFlag"    column="last_update_flag"    />
+    </resultMap>
+
+    <sql id="selectZsItemVo">
+        select item_id, item_code, item_name, unit_code, item_category, item_status, creation_method, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag from zs_item
+    </sql>
+
+    <sql id="selectZsItemVoByDeleteId">
+        and delete_id = 0    </sql>
+
+    <select id="selectZsItemList" parameterType="ZsItem" resultMap="ZsItemResult">
+        <include refid="selectZsItemVo"/>
+        <where>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="unitCode != null  and unitCode != ''"> and unit_code = #{unitCode}</if>
+            <if test="itemCategory != null  and itemCategory != ''"> and item_category = #{itemCategory}</if>
+            <if test="itemStatus != null  and itemStatus != ''"> and item_status = #{itemStatus}</if>
+            <if test="creationMethod != null  and creationMethod != ''"> and creation_method = #{creationMethod}</if>
+            <if test="remark1 != null  and remark1 != ''"> and remark1 = #{remark1}</if>
+            <if test="remark2 != null  and remark2 != ''"> and remark2 = #{remark2}</if>
+            <if test="remark3 != null  and remark3 != ''"> and remark3 = #{remark3}</if>
+            <if test="remark4 != null  and remark4 != ''"> and remark4 = #{remark4}</if>
+            <if test="remark5 != null  and remark5 != ''"> and remark5 = #{remark5}</if>
+            <if test="lastUpdateFlag != null  and lastUpdateFlag != ''"> and last_update_flag = #{lastUpdateFlag}</if>
+             and delete_id = 0
+        </where>
+        order By create_time DESC
+    </select>
+    
+    <select id="selectZsItemByItemId" parameterType="Long" resultMap="ZsItemResult">
+        <include refid="selectZsItemVo"/>
+        where item_id = #{itemId}
+        <include refid="selectZsItemVoByDeleteId"/>
+    </select>
+    <select id="selectItemByItemCode" parameterType="String" resultMap="ZsItemResult">
+        <include refid="selectZsItemVo"/>
+        where item_code = #{itemCode}
+        <include refid="selectZsItemVoByDeleteId"/>
+    </select>
+
+
+    <delete id="deleteZsItemByItemId" parameterType="Long">
+        delete from zs_item where item_id = #{itemId}
+    </delete>
+
+    <update id="deleteZsItemByItemIds" parameterType="String">
+        UPDATE zs_item
+        SET delete_id = 1
+        WHERE item_id IN
+        <foreach item="itemId" collection="array" open="(" separator="," close=")">
+            #{itemId}
+        </foreach>
+    </update>
+</mapper>
