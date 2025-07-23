@@ -1,8 +1,9 @@
 package com.zc.organization.service;
 
 import java.util.List;
-import com.zc.organization.domain.ZsBomLine;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zc.organization.domain.ZcBomLine;
 
 /**
  * BOM行Service接口
@@ -10,38 +11,38 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author zc
  * @date 2025-07-21
  */
-public interface IZsBomLineService extends IService<ZsBomLine> {
+public interface IZcBomLineService extends IService<ZcBomLine> {
     /**
      * 查询BOM行
      *
      * @param bomLineId BOM行主键
      * @return BOM行
      */
-    public ZsBomLine selectZsBomLineByBomLineId(Long bomLineId);
+    public ZcBomLine selectZcBomLineByBomLineId(Long bomLineId);
 
     /**
      * 查询BOM行列表
      *
-     * @param zsBomLine BOM行
+     * @param zcBomLine BOM行
      * @return BOM行集合
      */
-    public List<ZsBomLine> selectZsBomLineList(ZsBomLine zsBomLine);
+    public List<ZcBomLine> selectZcBomLineList(ZcBomLine zcBomLine);
 
     /**
      * 新增BOM行
      *
-     * @param zsBomLine BOM行
+     * @param zcBomLine BOM行
      * @return 结果
      */
-    public int insertZsBomLine(ZsBomLine zsBomLine);
+    public int insertZcBomLine(ZcBomLine zcBomLine);
 
     /**
      * 修改BOM行
      *
-     * @param zsBomLine BOM行
+     * @param zcBomLine BOM行
      * @return 结果
      */
-    public int updateZsBomLine(ZsBomLine zsBomLine);
+    public int updateZcBomLine(ZcBomLine zcBomLine);
 
     /**
      * 批量删除BOM行
@@ -49,7 +50,7 @@ public interface IZsBomLineService extends IService<ZsBomLine> {
      * @param bomLineIds 需要删除的BOM行主键集合
      * @return 结果
      */
-    public int deleteZsBomLineByBomLineIds(Long[] bomLineIds);
+    public int deleteZcBomLineByBomLineIds(Long[] bomLineIds);
 
     /**
      * 删除BOM行信息
@@ -57,5 +58,5 @@ public interface IZsBomLineService extends IService<ZsBomLine> {
      * @param bomLineId BOM行主键
      * @return 结果
      */
-    public int deleteZsBomLineByBomLineId(Long bomLineId);
+    public int deleteZcBomLineByBomLineId(Long bomLineId);
 }

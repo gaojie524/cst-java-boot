@@ -2,9 +2,9 @@ package com.zc.organization.service;
 
 import java.util.List;
 
-
-import com.zc.organization.domain.ZsBomHead;
+import com.zc.common.core.domain.TreeSelect;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zc.organization.domain.ZcBomHead;
 
 /**
  * BOM头表Service接口
@@ -12,46 +12,46 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author zc
  * @date 2025-07-20
  */
-public interface IZsBomHeadService extends IService<ZsBomHead> {
+public interface IZcBomHeadService extends IService<ZcBomHead> {
     /**
      * 查询BOM头表
      *
      * @param bomHeadId BOM头表主键
      * @return BOM头表
      */
-    public ZsBomHead selectZsBomHeadByBomHeadId(Long bomHeadId);
+    public ZcBomHead selectZcBomHeadByBomHeadId(Long bomHeadId);
 
     /**
      * 查询BOM头表列表
      *
-     * @param zsBomHead BOM头表
+     * @param zcBomHead BOM头表
      * @return BOM头表集合
      */
-    public List<ZsBomHead> selectZsBomHeadList(ZsBomHead zsBomHead);
+    public List<ZcBomHead> selectZcBomHeadList(ZcBomHead zcBomHead);
 
     /**
      * 新增BOM头表
      *
-     * @param zsBomHead BOM头表
+     * @param zcBomHead BOM头表
      * @return 结果
      */
-    public int insertZsBomHead(ZsBomHead zsBomHead);
+    public int insertZcBomHead(ZcBomHead zcBomHead);
 
     /**
      * 修改BOM头表
      *
-     * @param zsBomHead BOM头表
+     * @param zcBomHead BOM头表
      * @return 结果
      */
-    public int updateZsBomHead(ZsBomHead zsBomHead);
+    public int updateZcBomHead(ZcBomHead zcBomHead);
 
     /**
      * 批量删除BOM头表
      *
-     * @param bomHeadIds
+     * @param bomHeadIds 需要删除的BOM头表主键集合
      * @return 结果
      */
-    public int deleteZsBomHeadByBomHeadIds(Long[] bomHeadIds);
+    public int deleteZcBomHeadByBomHeadIds(Long[] bomHeadIds);
 
     /**
      * 删除BOM头表信息
@@ -59,7 +59,7 @@ public interface IZsBomHeadService extends IService<ZsBomHead> {
      * @param bomHeadId BOM头表主键
      * @return 结果
      */
-    public int deleteZsBomHeadByBomHeadId(Long bomHeadId);
+    public int deleteZcBomHeadByBomHeadId(Long bomHeadId);
 
     /**
      * 查询BOM树结构信息
@@ -67,15 +67,13 @@ public interface IZsBomHeadService extends IService<ZsBomHead> {
      * @param
      * @return 部门树信息集合
      */
-    public List<ZsBomHead> selectBomTreeList(ZsBomHead zsBomHead);
+    public List<TreeSelect> selectBomTreeList(ZcBomHead zcBomHead);
 
     /**
      * 构建前端所需要下拉树结构
      *
-     * @param zsBomHeads 部门列表
+     * @param zcBomHeads 部门列表
      * @return 下拉树结构列表
      */
-    List<ZsBomHead> buildBOMTreeSelect(List<ZsBomHead> zsBomHeads);
-
-
+    List<TreeSelect> buildBOMTreeSelect(List<ZcBomHead> zcBomHeads);
 }

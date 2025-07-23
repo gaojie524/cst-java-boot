@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.organization.mapper.ZcBomLineMapper">
+
+    <resultMap type="ZcBomLine" id="ZcBomLineResult">
+        <result property="bomLineId"    column="bom_line_id"    />
+        <result property="bomHeadId"    column="bom_head_id"    />
+        <result property="childItemId"    column="child_item_id"    />
+        <result property="sortOrder"    column="sort_order"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="lastUpdateFlag"    column="last_update_flag"    />
+        <result property="deleteId"    column="delete_id"    />
+    </resultMap>
+
+    <sql id="selectZcBomLineVo">
+        select zbl.bom_line_id,
+               zbl.bom_head_id,
+               zbl.child_item_id,
+               zbl.sort_order,
+               zbl.create_by,
+               zbl.create_time,
+               zbl.update_by,
+               zbl.update_time,
+               zbl.last_update_flag,
+               zbl.delete_id,
+               zi.item_code,
+               zi.item_name
+        from zc_bom_line zbl
+                 left join zc_item zi on zi.item_id = zbl.child_item_id
+    </sql>
+
+    <select id="selectZcBomLineList" parameterType="ZcBomLine" resultMap="ZcBomLineResult">
+        <include refid="selectZcBomLineVo"/>
+        <where>
+            <if test="bomHeadId != null  and bomHeadId != ''"> and zbl.bom_head_id = #{bomHeadId}</if>
+            <if test="bomLineId != null  and bomLineId != ''"> and zbl.bom_line_id = #{bomLineId}</if>
+            and zbl.delete_id = 0
+        </where>
+        order By sort_order
+    </select>
+
+    <select id="selectZcBomLineByBomLineId" parameterType="Long" resultMap="ZcBomLineResult">
+        <include refid="selectZcBomLineVo"/>
+        where zbl.bom_line_id = #{bomLineId}
+    </select>
+
+    <insert id="insertZcBomLine" parameterType="ZcBomLine" useGeneratedKeys="true" keyProperty="bomLineId">
+        insert into zc_bom_line
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bomHeadId != null">bom_head_id,</if>
+            <if test="childItemId != null">child_item_id,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="lastUpdateFlag != null">last_update_flag,</if>
+            <if test="deleteId != null">delete_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bomHeadId != null">#{bomHeadId},</if>
+            <if test="childItemId != null">#{childItemId},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="lastUpdateFlag != null">#{lastUpdateFlag},</if>
+            <if test="deleteId != null">#{deleteId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateZcBomLine" parameterType="ZcBomLine">
+        update zc_bom_line
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bomHeadId != null">bom_head_id = #{bomHeadId},</if>
+            <if test="childItemId != null">child_item_id = #{childItemId},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="lastUpdateFlag != null">last_update_flag = #{lastUpdateFlag},</if>
+            <if test="deleteId != null">delete_id = #{deleteId},</if>
+        </trim>
+        where bom_line_id = #{bomLineId}
+    </update>
+
+    <delete id="deleteZcBomLineByBomLineId" parameterType="Long">
+        delete from zc_bom_line where bom_line_id = #{bomLineId}
+    </delete>
+
+    <update id="deleteZcBomLineByBomLineIds" parameterType="String">
+        UPDATE zc_bom_line
+        SET delete_id = 1
+        WHERE bom_line_id IN
+        <foreach item="bomLineId" collection="array" open="(" separator="," close=")">
+            #{bomLineId}
+        </foreach>
+    </update>
+</mapper>

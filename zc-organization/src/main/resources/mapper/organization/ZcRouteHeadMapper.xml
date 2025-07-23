@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.organization.mapper.ZcRouteHeadMapper">
+
+    <resultMap type="ZcRouteHead" id="ZcRouteHeadResult">
+        <result property="routeHeadId"    column="route_head_id"    />
+        <result property="routeCode"    column="route_code"    />
+        <result property="routeVersion"    column="route_version"    />
+        <result property="routeDesc"    column="route_desc"    />
+        <result property="routeStatus"    column="route_status"    />
+        <result property="creationMethod"    column="creation_method"    />
+        <result property="remark1"    column="remark1"    />
+        <result property="remark2"    column="remark2"    />
+        <result property="remark3"    column="remark3"    />
+        <result property="remark4"    column="remark4"    />
+        <result property="remark5"    column="remark5"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="lastUpdateFlag"    column="last_update_flag"    />
+        <result property="deleteId"    column="delete_id"    />
+    </resultMap>
+
+    <sql id="selectZcRouteHeadVo">
+        select route_head_id, route_code, route_version, route_desc, route_status, creation_method, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag, delete_id from zc_route_head
+    </sql>
+
+    <select id="selectZcRouteHeadList" parameterType="ZcRouteHead" resultMap="ZcRouteHeadResult">
+        <include refid="selectZcRouteHeadVo"/>
+        <where>
+            <if test="routeCode != null  and routeCode != ''">  and route_code like CONCAT('%', #{routeCode}, '%')</if>
+            <if test="routeVersion != null  and routeVersion != ''">  and route_version like CONCAT('%', #{routeVersion}, '%')</if>
+            <if test="routeDesc != null  and routeDesc != ''"> and route_desc = #{routeDesc}</if>
+            <if test="routeStatus != null  and routeStatus != ''"> and route_status = #{routeStatus}</if>
+            <if test="creationMethod != null  and creationMethod != ''"> and creation_method = #{creationMethod}</if>
+            <if test="remark1 != null  and remark1 != ''"> and remark1 = #{remark1}</if>
+            <if test="remark2 != null  and remark2 != ''"> and remark2 = #{remark2}</if>
+            <if test="remark3 != null  and remark3 != ''"> and remark3 = #{remark3}</if>
+            <if test="remark4 != null  and remark4 != ''"> and remark4 = #{remark4}</if>
+            <if test="remark5 != null  and remark5 != ''"> and remark5 = #{remark5}</if>
+        </where>
+    </select>
+
+    <select id="selectZcRouteHeadByRouteHeadId" parameterType="Long" resultMap="ZcRouteHeadResult">
+        <include refid="selectZcRouteHeadVo"/>
+        where route_head_id = #{routeHeadId}
+    </select>
+
+    <insert id="insertZcRouteHead" parameterType="ZcRouteHead">
+        insert into zc_route_head
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="routeHeadId != null">route_head_id,</if>
+            <if test="routeCode != null and routeCode != ''">route_code,</if>
+            <if test="routeVersion != null and routeVersion != ''">route_version,</if>
+            <if test="routeDesc != null">route_desc,</if>
+            <if test="routeStatus != null and routeStatus != ''">route_status,</if>
+            <if test="creationMethod != null and creationMethod != ''">creation_method,</if>
+            <if test="remark1 != null">remark1,</if>
+            <if test="remark2 != null">remark2,</if>
+            <if test="remark3 != null">remark3,</if>
+            <if test="remark4 != null">remark4,</if>
+            <if test="remark5 != null">remark5,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="lastUpdateFlag != null">last_update_flag,</if>
+            <if test="deleteId != null">delete_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="routeHeadId != null">#{routeHeadId},</if>
+            <if test="routeCode != null and routeCode != ''">#{routeCode},</if>
+            <if test="routeVersion != null and routeVersion != ''">#{routeVersion},</if>
+            <if test="routeDesc != null">#{routeDesc},</if>
+            <if test="routeStatus != null and routeStatus != ''">#{routeStatus},</if>
+            <if test="creationMethod != null and creationMethod != ''">#{creationMethod},</if>
+            <if test="remark1 != null">#{remark1},</if>
+            <if test="remark2 != null">#{remark2},</if>
+            <if test="remark3 != null">#{remark3},</if>
+            <if test="remark4 != null">#{remark4},</if>
+            <if test="remark5 != null">#{remark5},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="lastUpdateFlag != null">#{lastUpdateFlag},</if>
+            <if test="deleteId != null">#{deleteId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateZcRouteHead" parameterType="ZcRouteHead">
+        update zc_route_head
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="routeCode != null and routeCode != ''">route_code = #{routeCode},</if>
+            <if test="routeVersion != null and routeVersion != ''">route_version = #{routeVersion},</if>
+            <if test="routeDesc != null">route_desc = #{routeDesc},</if>
+            <if test="routeStatus != null and routeStatus != ''">route_status = #{routeStatus},</if>
+            <if test="creationMethod != null and creationMethod != ''">creation_method = #{creationMethod},</if>
+            <if test="remark1 != null">remark1 = #{remark1},</if>
+            <if test="remark2 != null">remark2 = #{remark2},</if>
+            <if test="remark3 != null">remark3 = #{remark3},</if>
+            <if test="remark4 != null">remark4 = #{remark4},</if>
+            <if test="remark5 != null">remark5 = #{remark5},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="lastUpdateFlag != null">last_update_flag = #{lastUpdateFlag},</if>
+            <if test="deleteId != null">delete_id = #{deleteId},</if>
+        </trim>
+        where route_head_id = #{routeHeadId}
+    </update>
+
+    <delete id="deleteZcRouteHeadByRouteHeadId" parameterType="Long">
+        delete from zc_route_head where route_head_id = #{routeHeadId}
+    </delete>
+
+    <delete id="deleteZcRouteHeadByRouteHeadIds" parameterType="String">
+        delete from zc_route_head where route_head_id in
+        <foreach item="routeHeadId" collection="array" open="(" separator="," close=")">
+            #{routeHeadId}
+        </foreach>
+    </delete>
+</mapper>

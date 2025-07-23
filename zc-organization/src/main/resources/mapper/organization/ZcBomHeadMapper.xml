@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.organization.mapper.ZcBomHeadMapper">
+
+    <resultMap type="ZcBomHead" id="ZcBomHeadResult">
+        <result property="bomHeadId"    column="bom_head_id"    />
+        <result property="bomCode"    column="bom_code"    />
+        <result property="parentItemId"    column="parent_item_id"    />
+        <result property="bomVersion"    column="bom_version"    />
+        <result property="bomStatus"    column="bom_status"    />
+        <result property="creationMethod"    column="creation_method"    />
+        <result property="remark1"    column="remark1"    />
+        <result property="remark2"    column="remark2"    />
+        <result property="remark3"    column="remark3"    />
+        <result property="remark4"    column="remark4"    />
+        <result property="remark5"    column="remark5"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="lastUpdateFlag"    column="last_update_flag"    />
+        <result property="deleteId"    column="delete_id"    />
+    </resultMap>
+
+    <sql id="selectZcBomHeadVo">
+        select
+            zbh.bom_head_id,
+            zbh.bom_code,
+            zbh.parent_item_id,
+            zbh.bom_version,
+            zbh.bom_status,
+            zbh.creation_method,
+            zbh.remark1,
+            zbh.remark2,
+            zbh.remark3,
+            zbh.remark4,
+            zbh.remark5,
+            zbh.create_by,
+            zbh.create_time,
+            zbh.update_by,
+            zbh.update_time,
+            zbh.last_update_flag,
+            zbh.delete_id,
+            zi.item_code,
+            zi.item_name
+        from zc_bom_head zbh
+                 left join zc_item zi on zi.item_id = zbh.parent_item_id
+
+    </sql>
+
+    <select id="selectZcBomHeadList" parameterType="ZcBomHead" resultMap="ZcBomHeadResult">
+        <include refid="selectZcBomHeadVo"/>
+        <where>
+            <if test="bomHeadId != null  and bomHeadId != ''"> and zbh.bom_head_id = #{bomHeadId}</if>
+            <if test="bomCode != null  and bomCode != ''"> and zbh.bom_code = #{bomCode}</if>
+            <if test="bomVersion != null  and bomVersion != ''"> and zbh.bom_version = #{bomVersion}</if>
+            <if test="bomStatus != null  and bomStatus != ''"> and zbh.bom_status = #{bomStatus}</if>
+            and zbh.delete_id = 0
+        </where>
+    </select>
+
+    <select id="selectZcBomHeadByBomHeadId" parameterType="Long" resultMap="ZcBomHeadResult">
+        <include refid="selectZcBomHeadVo"/>
+        where zbh.bom_head_id = #{bomHeadId}
+    </select>
+
+    <insert id="insertZcBomHead" parameterType="ZcBomHead" useGeneratedKeys="true" keyProperty="bomHeadId">
+        insert into zc_bom_head
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bomCode != null">bom_code,</if>
+            <if test="parentItemId != null">parent_item_id,</if>
+            <if test="bomVersion != null and bomVersion != ''">bom_version,</if>
+            <if test="bomStatus != null and bomStatus != ''">bom_status,</if>
+            <if test="creationMethod != null and creationMethod != ''">creation_method,</if>
+            <if test="remark1 != null">remark1,</if>
+            <if test="remark2 != null">remark2,</if>
+            <if test="remark3 != null">remark3,</if>
+            <if test="remark4 != null">remark4,</if>
+            <if test="remark5 != null">remark5,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="lastUpdateFlag != null and lastUpdateFlag != ''">last_update_flag,</if>
+            <if test="deleteId != null">delete_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bomCode != null">#{bomCode},</if>
+            <if test="parentItemId != null">#{parentItemId},</if>
+            <if test="bomVersion != null and bomVersion != ''">#{bomVersion},</if>
+            <if test="bomStatus != null and bomStatus != ''">#{bomStatus},</if>
+            <if test="creationMethod != null and creationMethod != ''">#{creationMethod},</if>
+            <if test="remark1 != null">#{remark1},</if>
+            <if test="remark2 != null">#{remark2},</if>
+            <if test="remark3 != null">#{remark3},</if>
+            <if test="remark4 != null">#{remark4},</if>
+            <if test="remark5 != null">#{remark5},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="lastUpdateFlag != null and lastUpdateFlag != ''">#{lastUpdateFlag},</if>
+            <if test="deleteId != null">#{deleteId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateZcBomHead" parameterType="ZcBomHead">
+        update zc_bom_head
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bomCode != null">bom_code = #{bomCode},</if>
+            <if test="parentItemId != null">parent_item_id = #{parentItemId},</if>
+            <if test="bomVersion != null and bomVersion != ''">bom_version = #{bomVersion},</if>
+            <if test="bomStatus != null and bomStatus != ''">bom_status = #{bomStatus},</if>
+            <if test="creationMethod != null and creationMethod != ''">creation_method = #{creationMethod},</if>
+            <if test="remark1 != null">remark1 = #{remark1},</if>
+            <if test="remark2 != null">remark2 = #{remark2},</if>
+            <if test="remark3 != null">remark3 = #{remark3},</if>
+            <if test="remark4 != null">remark4 = #{remark4},</if>
+            <if test="remark5 != null">remark5 = #{remark5},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="lastUpdateFlag != null and lastUpdateFlag != ''">last_update_flag = #{lastUpdateFlag},</if>
+            <if test="deleteId != null">delete_id = #{deleteId},</if>
+        </trim>
+        where bom_head_id = #{bomHeadId}
+    </update>
+
+    <delete id="deleteZcBomHeadByBomHeadId" parameterType="Long">
+        delete from zc_bom_head where bom_head_id = #{bomHeadId}
+    </delete>
+
+
+    <update id="deleteZcBomHeadByBomHeadIds" parameterType="String">
+        UPDATE zc_bom_head
+        SET delete_id = 1
+        WHERE bom_head_id IN
+        <foreach item="bomHeadId" collection="array" open="(" separator="," close=")">
+            #{bomHeadId}
+        </foreach>
+    </update>
+</mapper>
