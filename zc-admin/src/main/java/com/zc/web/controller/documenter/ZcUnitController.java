@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zc.documenter.domain.ZcUnit;
+import com.zc.documenter.service.IZcUnitService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +31,10 @@ import com.zc.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/documenter/unit")
-public class ZsUnitController extends BaseController
+public class ZcUnitController extends BaseController
 {
     @Autowired
-    private IZsUnitService zsUnitService;
+    private IZcUnitService zcUnitService;
 
     /**
      * 查询单位管理列表
@@ -43,7 +44,7 @@ public class ZsUnitController extends BaseController
     public TableDataInfo list(ZcUnit zsUnit)
     {
         startPage();
-        List<ZcUnit> list = zsUnitService.selectZsUnitList(zsUnit);
+        List<ZcUnit> list = zcUnitService.selectZcUnitList(zsUnit);
         return getDataTable(list);
     }
 
@@ -55,7 +56,7 @@ public class ZsUnitController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, ZcUnit zsUnit)
     {
-        List<ZcUnit> list = zsUnitService.selectZsUnitList(zsUnit);
+        List<ZcUnit> list = zcUnitService.selectZcUnitList(zsUnit);
         ExcelUtil<ZcUnit> util = new ExcelUtil<ZcUnit>(ZcUnit.class);
         util.exportExcel(response, list, "单位管理数据");
     }
@@ -67,7 +68,7 @@ public class ZsUnitController extends BaseController
     @GetMapping(value = "/{unitId}")
     public AjaxResult getInfo(@PathVariable("unitId") Long unitId)
     {
-        return success(zsUnitService.selectZsUnitByUnitId(unitId));
+        return success(zcUnitService.selectZcUnitByUnitId(unitId));
     }
 
     /**
@@ -78,7 +79,7 @@ public class ZsUnitController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody ZcUnit zsUnit)
     {
-        return toAjax(zsUnitService.insertZsUnit(zsUnit));
+        return toAjax(zcUnitService.insertZcUnit(zsUnit));
     }
 
     /**
@@ -89,7 +90,7 @@ public class ZsUnitController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ZcUnit zsUnit)
     {
-        return toAjax(zsUnitService.updateZsUnit(zsUnit));
+        return toAjax(zcUnitService.updateZcUnit(zsUnit));
     }
 
     /**
@@ -100,6 +101,6 @@ public class ZsUnitController extends BaseController
 	@DeleteMapping("/{unitIds}")
     public AjaxResult remove(@PathVariable Long[] unitIds)
     {
-        return toAjax(zsUnitService.deleteZsUnitByUnitIds(unitIds));
+        return toAjax(zcUnitService.deleteZcUnitByUnitIds(unitIds));
     }
 }

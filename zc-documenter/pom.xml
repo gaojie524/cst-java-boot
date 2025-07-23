@@ -32,6 +32,11 @@
         <artifactId>lombok</artifactId>
         <scope>provided</scope>
     </dependency>
+    <dependency>
+        <groupId>com.zc</groupId>
+        <artifactId>zc</artifactId>
+        <version>3.9.0</version>
+    </dependency>
 </dependencies>
 
 </project>
