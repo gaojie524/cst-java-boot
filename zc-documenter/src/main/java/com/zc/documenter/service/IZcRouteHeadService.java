@@ -1,9 +1,9 @@
-package com.zc.organization.service;
+package com.zc.documenter.service;
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zc.organization.domain.ZcRouteHead;
+import com.zc.documenter.domain.ZcRouteHead;
 
 /**
  * 工艺路线头Service接口

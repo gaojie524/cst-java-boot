@@ -1,4 +1,4 @@
-package com.zc.web.controller.organization;
+package com.zc.web.controller.documenter;
 
 import com.zc.common.annotation.Log;
 import com.zc.common.core.controller.BaseController;
@@ -6,8 +6,8 @@ import com.zc.common.core.domain.AjaxResult;
 import com.zc.common.core.page.TableDataInfo;
 import com.zc.common.enums.BusinessType;
 import com.zc.common.utils.poi.ExcelUtil;
-import com.zc.organization.domain.ZcRouteHead;
-import com.zc.organization.service.IZcRouteHeadService;
+import com.zc.documenter.domain.ZcRouteHead;
+import com.zc.documenter.service.IZcRouteHeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ import java.util.UUID;
  * @date 2025-07-17
  */
 @RestController
-@RequestMapping("/organization/head")
+@RequestMapping("/documenter/head")
 public class ZcRouteHeadController extends BaseController
 {
     @Autowired
@@ -31,7 +31,7 @@ public class ZcRouteHeadController extends BaseController
     /**
      * 查询工艺路线头列表
      */
-    @PreAuthorize("@ss.hasPermi('organization:head:list')")
+    @PreAuthorize("@ss.hasPermi('documenter:head:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZcRouteHead zcRouteHead)
     {
@@ -43,7 +43,7 @@ public class ZcRouteHeadController extends BaseController
     /**
      * 导出工艺路线头列表
      */
-    @PreAuthorize("@ss.hasPermi('organization:head:export')")
+    @PreAuthorize("@ss.hasPermi('documenter:head:export')")
     @Log(title = "工艺路线头", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ZcRouteHead zcRouteHead)
@@ -56,7 +56,7 @@ public class ZcRouteHeadController extends BaseController
     /**
      * 获取工艺路线头详细信息
      */
-    @PreAuthorize("@ss.hasPermi('organization:head:query')")
+    @PreAuthorize("@ss.hasPermi('documenter:head:query')")
     @GetMapping(value = "/{routeHeadId}")
     public AjaxResult getInfo(@PathVariable("routeHeadId") Long routeHeadId)
     {
@@ -66,7 +66,7 @@ public class ZcRouteHeadController extends BaseController
     /**
      * 新增工艺路线头
      */
-    @PreAuthorize("@ss.hasPermi('organization:head:add')")
+    @PreAuthorize("@ss.hasPermi('documenter:head:add')")
     @Log(title = "工艺路线头", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZcRouteHead zcRouteHead)
@@ -80,7 +80,7 @@ public class ZcRouteHeadController extends BaseController
     /**
      * 修改工艺路线头
      */
-    @PreAuthorize("@ss.hasPermi('organization:head:edit')")
+    @PreAuthorize("@ss.hasPermi('documenter:head:edit')")
     @Log(title = "工艺路线头", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZcRouteHead zcRouteHead)
@@ -91,7 +91,7 @@ public class ZcRouteHeadController extends BaseController
     /**
      * 删除工艺路线头
      */
-    @PreAuthorize("@ss.hasPermi('organization:head:remove')")
+    @PreAuthorize("@ss.hasPermi('documenter:head:remove')")
     @Log(title = "工艺路线头", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{routeHeadIds}")
     public AjaxResult remove(@PathVariable Long[] routeHeadIds)

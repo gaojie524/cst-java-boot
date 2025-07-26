@@ -1,7 +1,7 @@
-package com.zc.organization.mapper;
+package com.zc.documenter.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zc.organization.domain.ZcRouteHead;
+import com.zc.documenter.domain.ZcRouteHead;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

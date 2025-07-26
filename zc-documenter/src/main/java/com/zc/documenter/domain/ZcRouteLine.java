@@ -1,4 +1,4 @@
-package com.zc.organization.domain;
+package com.zc.documenter.domain;
 
 import com.zc.common.annotation.Excel;
 import com.zc.common.core.domain.BaseEntity;

@@ -1,4 +1,4 @@
-package com.zc.organization.domain;
+package com.zc.documenter.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
