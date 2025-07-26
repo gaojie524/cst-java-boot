@@ -80,7 +80,6 @@ public class ZcProcessController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody ZcProcess zcProcess)
     {
-        zcProcess.setProcessCode(UUID.randomUUID().toString());
         return toAjax(zcProcessService.insertZcProcess(zcProcess));
     }
 

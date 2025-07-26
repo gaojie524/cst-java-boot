@@ -1,4 +1,4 @@
-package com.zc.organization.domain;
+package com.zc.documenter.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -26,9 +26,13 @@ public class ZcRouteHead extends BaseEntity {
     @Excel(name = "工艺路线编号")
     private String routeCode;
 
-    /** 工艺路线版本号   工艺路线编号+工艺路线版本号 */
-    @Excel(name = "工艺路线版本号   工艺路线编号+工艺路线版本号")
-    private String routeVersion;
+    /** 工艺路线版本号  */
+    @Excel(name = "工艺路线大版本号")
+    private Long routeVersion;
+
+
+    @Excel(name = "工艺路线小版本号")
+    private Long routeSmallVersion;
 
     /** 工艺路线描述 */
     @Excel(name = "工艺路线描述")
@@ -43,23 +47,19 @@ public class ZcRouteHead extends BaseEntity {
     private String creationMethod;
 
     /** 备注1 */
-    @Excel(name = "备注1")
     private String remark1;
 
     /** 备注2 */
-    @Excel(name = "备注2")
     private String remark2;
 
     /** 备注3 */
-    @Excel(name = "备注3")
     private String remark3;
 
     /** 备注4 */
-    @Excel(name = "备注4")
+
     private String remark4;
 
     /** 备注5 */
-    @Excel(name = "备注5")
     private String remark5;
 
     /** 最后更新标识 */

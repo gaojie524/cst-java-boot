@@ -1,9 +1,10 @@
-package com.zc.organization.service;
+package com.zc.documenter.service;
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zc.organization.domain.ZcRouteHead;
+import com.zc.common.core.domain.entity.SysUser;
+import com.zc.documenter.domain.ZcRouteHead;
 
 /**
  * 工艺路线头Service接口
@@ -59,4 +60,14 @@ public interface IZcRouteHeadService extends IService<ZcRouteHead> {
      * @return 结果
      */
     public int deleteZcRouteHeadByRouteHeadId(Long routeHeadId);
+
+
+    /**
+     * 修改工艺路线状态
+     *
+     * @param zcRouteHead 用户信息
+     * @return 结果
+     */
+    public int updateRouteHeadStatus(ZcRouteHead zcRouteHead);
+
 }

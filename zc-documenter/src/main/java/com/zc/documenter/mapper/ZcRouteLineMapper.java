@@ -1,17 +1,15 @@
-package com.zc.organization.mapper;
+package com.zc.documenter.mapper;
 
 import java.util.List;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zc.organization.domain.ZcRouteLine;
-import org.apache.ibatis.annotations.Mapper;
+import com.zc.documenter.domain.ZcRouteLine;
 
 /**
  * 工艺路线行Mapper接口
  *
  * @author zc
- * @date 2025-07-17
+ * @date 2025-07-26
  */
-@Mapper
 public interface ZcRouteLineMapper extends BaseMapper<ZcRouteLine> {
     /**
      * 查询工艺路线行
@@ -28,6 +26,10 @@ public interface ZcRouteLineMapper extends BaseMapper<ZcRouteLine> {
      * @return 工艺路线行集合
      */
     public List<ZcRouteLine> selectZcRouteLineList(ZcRouteLine zcRouteLine);
+
+
+
+
 
     /**
      * 删除工艺路线行

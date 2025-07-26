@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zc.organization.mapper.ZcRouteHeadMapper">
+<mapper namespace="com.zc.documenter.mapper.ZcRouteHeadMapper">
 
     <resultMap type="ZcRouteHead" id="ZcRouteHeadResult">
         <result property="routeHeadId"    column="route_head_id"    />
@@ -25,7 +25,7 @@
     </resultMap>
 
     <sql id="selectZcRouteHeadVo">
-        select route_head_id, route_code, route_version, route_desc, route_status, creation_method, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag, delete_id from zc_route_head
+        select route_head_id, route_code, route_version, route_desc, route_status, creation_method, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag, delete_id,route_small_version from zc_route_head
     </sql>
 
     <select id="selectZcRouteHeadList" parameterType="ZcRouteHead" resultMap="ZcRouteHeadResult">
@@ -111,6 +111,15 @@
             <if test="lastUpdateFlag != null">last_update_flag = #{lastUpdateFlag},</if>
             <if test="deleteId != null">delete_id = #{deleteId},</if>
         </trim>
+        where route_head_id = #{routeHeadId}
+    </update>
+    <update id="updateRouteHead">
+        update zc_route_head
+        <set>
+            <if test="routeStatus != null and routeStatus != 0">route_status = #{routeStatus},</if>
+            <if test="routeSmallVersion != null and routeSmallVersion != 0">route_small_version = #{routeSmallVersion},</if>
+            update_time = sysdate()
+        </set>
         where route_head_id = #{routeHeadId}
     </update>
 

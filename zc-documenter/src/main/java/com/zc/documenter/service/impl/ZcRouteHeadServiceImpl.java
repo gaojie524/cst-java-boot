@@ -1,10 +1,11 @@
-package com.zc.organization.service.impl;
+package com.zc.documenter.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zc.organization.domain.ZcRouteHead;
-import com.zc.organization.mapper.ZcRouteHeadMapper;
-import com.zc.organization.service.IZcRouteHeadService;
+import com.zc.common.core.domain.entity.SysUser;
+import com.zc.documenter.domain.ZcRouteHead;
+import com.zc.documenter.mapper.ZcRouteHeadMapper;
+import com.zc.documenter.service.IZcRouteHeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,5 +87,16 @@ public class ZcRouteHeadServiceImpl extends ServiceImpl<ZcRouteHeadMapper, ZcRou
     @Override
     public int deleteZcRouteHeadByRouteHeadId(Long routeHeadId) {
         return zcRouteHeadMapper.deleteZcRouteHeadByRouteHeadId(routeHeadId);
+    }
+
+    /**
+     * 修改工艺路线状态
+     *
+     * @param zcRouteHead 用户信息
+     * @return 结果
+     */
+    @Override
+    public int updateRouteHeadStatus(ZcRouteHead zcRouteHead) {
+        return zcRouteHeadMapper.updateRouteHead(zcRouteHead);
     }
 }

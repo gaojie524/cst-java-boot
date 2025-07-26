@@ -1,7 +1,8 @@
-package com.zc.organization.mapper;
+package com.zc.documenter.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zc.organization.domain.ZcRouteHead;
+import com.zc.common.core.domain.entity.SysUser;
+import com.zc.documenter.domain.ZcRouteHead;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -45,4 +46,13 @@ public interface ZcRouteHeadMapper extends BaseMapper<ZcRouteHead> {
      * @return 结果
      */
     public int deleteZcRouteHeadByRouteHeadIds(Long[] routeHeadIds);
+
+
+    /**
+     * 修改工艺路线信息
+     *
+     * @param zcRouteHead 工艺路线信息
+     * @return 结果
+     */
+    public int updateRouteHead(ZcRouteHead zcRouteHead);
 }

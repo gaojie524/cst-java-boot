@@ -1,20 +1,18 @@
-package com.zc.organization.service.impl;
+package com.zc.documenter.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
-
-import com.zc.organization.domain.ZcRouteLine;
-import com.zc.organization.mapper.ZcRouteLineMapper;
-import com.zc.organization.service.IZcRouteLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.zc.documenter.mapper.ZcRouteLineMapper;
+import com.zc.documenter.domain.ZcRouteLine;
+import com.zc.documenter.service.IZcRouteLineService;
 
 /**
  * 工艺路线行Service业务层处理
  *
  * @author zc
- * @date 2025-07-17
+ * @date 2025-07-26
  */
 @Service
 public class ZcRouteLineServiceImpl extends ServiceImpl<ZcRouteLineMapper, ZcRouteLine> implements IZcRouteLineService {

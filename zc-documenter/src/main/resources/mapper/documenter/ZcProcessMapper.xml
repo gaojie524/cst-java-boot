@@ -24,23 +24,50 @@
     </resultMap>
 
     <sql id="selectZcProcessVo">
-        select process_id, process_code, process_name, process_desc, process_status, creation_method, remark1, remark2, remark3, remark4, remark5, create_by, create_time, update_by, update_time, last_update_flag from zc_process
+        SELECT
+            zcp.process_id,
+            zcp.process_code,
+            zcp.process_name,
+            zcp.process_desc,
+            zcp.process_status,
+            zcp.creation_method,
+            zcp.remark1,
+            zcp.remark2,
+            zcp.remark3,
+            zcp.remark4,
+            zcp.remark5,
+            zcp.create_by,
+            zcp.create_time,
+            zcp.update_by,
+            zcp.update_time,
+            zcp.last_update_flag,
+            zcp.one_level_standard_time,
+            zcp.one_level_person_charge,
+            (SELECT u1.user_name FROM sys_user u1 WHERE u1.user_id = zcp.one_level_person_charge) AS oneLevelPersonChargeName,
+            zcp.two_level_standard_time,
+            zcp.two_level_person_charge,
+            (SELECT u2.user_name FROM sys_user u2 WHERE u2.user_id = zcp.two_level_person_charge) AS twoLevelPersonChargeName,
+            zcp.three_level_standard_time,
+            zcp.three_level_person_charge,
+            (SELECT u3.user_name FROM sys_user u3 WHERE u3.user_id = zcp.three_level_person_charge) AS threeLevelPersonChargeName
+        FROM
+            zc_process zcp
     </sql>
 
     <select id="selectZcProcessList" parameterType="ZcProcess" resultMap="ZcProcessResult">
         <include refid="selectZcProcessVo"/>
         <where>
-            <if test="processName != null  and processName != ''"> and process_name like concat('%', #{processName}, '%')</if>
-            <if test="processDesc != null  and processDesc != ''"> and process_desc = #{processDesc}</if>
-            <if test="processStatus != null  and processStatus != ''"> and process_status = #{processStatus}</if>
-            and delete_id = 0
+            <if test="processName != null  and processName != ''"> and zcp.process_name like concat('%', #{processName}, '%')</if>
+            <if test="processDesc != null  and processDesc != ''"> and  zcp.process_desc = #{processDesc}</if>
+            <if test="processStatus != null  and processStatus != ''"> and  zcp.process_status = #{processStatus}</if>
+            and zcp.delete_id = 0
         </where>
-        order By create_time DESC
+        order By zcp.create_time DESC
     </select>
 
     <select id="selectZcProcessByProcessId" parameterType="Long" resultMap="ZcProcessResult">
         <include refid="selectZcProcessVo"/>
-        where process_id = #{processId}
+        where  zcp.process_id = #{processId}
     </select>
 
 
